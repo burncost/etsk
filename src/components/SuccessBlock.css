@@ -1,0 +1,86 @@
+:root {
+    --gap: 2rem;
+    --gap-sm: calc(var(--gap) / 2);
+    --gap-md: calc(var(--gap) * 1.5);
+    --gap-lg: calc(var(--gap) * 2);
+  }
+  
+  @keyframes thanks {
+    from {
+      transform: translate3d(0, -3rem, 0);
+    }
+    to {
+      transform: translate3d(0, 0, 0);
+    }
+  }
+  
+  @keyframes success-icon-animation {
+    from {
+      opacity: 0;
+      transform: scale(0.1) rotate(30deg);
+      transform-origin: center bottom;
+    }
+    50% {
+      transform: rotate(-10deg) scale(1.25);
+    }
+    70% {
+      transform: rotate(3deg);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+  
+  /* Container Styles */
+  .container {
+    display: flex;
+    min-height: 100vh;
+    width: 100vw;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  /* Success Block Styles */
+  .success-block {
+    display: flex;
+    align-items: center;
+  }
+  
+  /* Title Styles */
+  .success-block .title {
+    font-size: 3.5rem;
+    font-weight: bold;
+    text-align: center; /* Center the text */
+  }
+  
+  /* Line Styles (for multi-line text) */
+  .success-block .title .line {
+    display: block; /* Ensure each line is on its own line */
+  }
+  
+  /* Letter Styles */
+  .success-block .title > .line > span {
+    display: inline-block;
+    opacity: 1;
+    transition: transform 0.3s, opacity 0.3s;
+    transition-timing-function: cubic-bezier(0.75, 0, 0.125, 1);
+    animation: thanks 0.3s forwards;
+    margin: 0 -1px;
+  }
+  
+  /* Hover Effect for Letters */
+  .success-block .title:hover > .line > span {
+    animation: thanks 0.35s forwards;
+  }
+  
+  /* Success Icon Styles */
+  .success-block .success-icon {
+    margin-right: var(--gap-sm);
+    width: var(--gap-lg);
+    height: var(--gap-lg);
+    color: #93c461;
+    opacity: 0;
+    margin-left: calc(-1 * var(--gap));
+    animation: success-icon-animation 1s 0.25s forwards;
+  }
