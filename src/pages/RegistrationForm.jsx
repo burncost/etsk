@@ -1167,20 +1167,19 @@ export default function RegistrationForm() {
                               
                               <Show when={(modeOfStudy() !== "Virtual")}>
                                 <For each={[
-                                  "SUG Charges",
-                                  "Health Insurance",
-                                  "Departmental Charges",
-                                  "Examination/Stationery",
-                                  "Administrative Services",
-                                  "Campus Development Levy",
-                                  "ECWA Education Dept Levy",
-                                  "Library Use and Services",
-                                  "New Student Matriculation",
-                                  "ICT Dev and Internet Access",
-                                  "Seminary Student/Library ID Card",
-                                  "Academic Catalogue",
-                                  "Late Registration",
-                                  "ACTEA Accreditation/Services"
+                                  "Compound Improvement",
+                                  "Student Council/Departmental Fees",
+                                  "Educators Levy",
+                                  "ID card",
+                                  "Medical Deposit",
+                                  "Matriculation Fee",
+                                  "Sport fee",
+                                  "Library Charges",
+                                  "Administrative Charges",
+                                  "Cafe Fee",
+                                  "Utility",
+                                  "ACTEA Accreditation/Services",
+                                  "Seminary Book",
                                 ]}>
                                 {(chargeName, i) => (
                                   <tr class="border-b border-black">
