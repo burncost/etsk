@@ -45,7 +45,7 @@ export default function UnifiedPortal() {
           setMessage("*All required fields must be filled.");
           setIsProcessing(false); return;
         }
-        if (data.username.length !== 5) { setMessage("*Student ID must be exactly 5 characters."); setIsProcessing(false); return; }
+        if (data.username.length !== 11) { setMessage("*Student ID must not be empty."); setIsProcessing(false); return; }
         if (data.phone_number.length !== 11) { setMessage("*Phone number must be exactly 11 digits."); setIsProcessing(false); return; }
 
         const response = await fetch(`${VITE_API_URL}/auth/register`, {
@@ -77,7 +77,7 @@ export default function UnifiedPortal() {
           setMessage("*Username and Password are required.");
           setIsProcessing(false); return;
         }
-        if (tab === "Student" && data.username.length !== 8) {
+        if (tab === "Student" && data.username.length !== 5) {
           setMessage("*Student ID must be exactly 5 characters.");
           setIsProcessing(false); return;
         }
