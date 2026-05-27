@@ -567,7 +567,7 @@ export default function RegistrationForm() {
         </div>
 
         {/* Main Form Container - Academic Style */}
-        <div class="bg-white text-gray-800 font-serif max-w-5xl mx-auto my-6 shadow-lg print:shadow-none print:m-0 text-sm">
+        <div class="bg-white text-gray-800 font-serif max-w-5xl mx-auto my-6 shadow-lg print:shadow-none print:m-0 text-sm print-compact">
           
           {/* Institutional Header */}
           <header class="border-b-4 border-purple-900 bg-gradient-to-r from-purple-50 to-amber-50 px-8 py-6">
@@ -621,11 +621,11 @@ export default function RegistrationForm() {
           <div class="px-8 py-6 space-y-8">
             
             {/* ===== PERSONAL DATA SECTION ===== */}
-            <section class="border-2 border-purple-100 rounded-xl overflow-hidden">
+            <section class="border-2 border-purple-100 rounded-xl overflow-hidden no-break">
               <div class="bg-purple-900 text-amber-100 px-5 py-3 flex items-center justify-between">
                 <h2 class="font-bold text-lg tracking-wide">:: Personal Data</h2>
                 {/* Passport Photo */}
-                <div class="w-24 h-24 border-2 border-amber-300 rounded-lg overflow-hidden bg-white shadow-inner">
+                <div class="w-24 h-24 border-2 border-amber-300 rounded-lg overflow-hidden bg-white shadow-inner print-compact">
                   <img
                     src={getOptPassport(registrationData().user.passport_url)}
                     class="w-full h-full object-cover"
@@ -634,7 +634,7 @@ export default function RegistrationForm() {
                 </div>
               </div>
               
-              <div class="p-5 bg-white">
+              <div class="p-5 bg-white print-compact">
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-x-6 gap-y-4 text-sm">
                   <div>
                     <span class="text-gray-500 block text-xs uppercase tracking-wide">Full Name</span>
@@ -697,12 +697,12 @@ export default function RegistrationForm() {
             </section>
 
             {/* ===== DROPPED COURSES SECTION ===== */}
-            <section class="border-2 border-purple-100 rounded-xl overflow-hidden">
+            <section class="border-2 border-purple-100 rounded-xl overflow-hidden no-break">
               <div class="bg-purple-900 text-amber-100 px-5 py-3">
                 <h2 class="font-bold text-lg tracking-wide">:: Dropped Courses</h2>
               </div>
               
-              <div class="p-5 bg-white overflow-x-auto">
+              <div class="p-5 bg-white overflow-x-auto print-compact">
                 <Show
                   when={droppedCourses}
                   fallback={
@@ -772,12 +772,12 @@ export default function RegistrationForm() {
             </section>
 
             {/* ===== ADDED COURSES SECTION ===== */}
-            <section class="border-2 border-purple-100 rounded-xl overflow-hidden">
+            <section class="border-2 border-purple-100 rounded-xl overflow-hidden no-break">
               <div class="bg-purple-900 text-amber-100 px-5 py-3">
                 <h2 class="font-bold text-lg tracking-wide">:: Added Courses</h2>
               </div>
               
-              <div class="p-5 bg-white overflow-x-auto">
+              <div class="p-5 bg-white overflow-x-auto print-compact">
                 <Show
                   when={addedCourses}
                   fallback={
@@ -847,7 +847,7 @@ export default function RegistrationForm() {
             </section>
 
             {/* ===== SUMMARY OF FEES ===== */}
-            <section class="border-2 border-purple-100 rounded-xl overflow-hidden bg-gradient-to-br from-purple-50 via-white to-amber-50">
+            <section class="border-2 border-purple-100 rounded-xl overflow-hidden bg-gradient-to-br from-purple-50 via-white to-amber-50 no-break">
               <div class="bg-purple-900 text-amber-100 px-5 py-3">
                 <h2 class="font-bold text-lg tracking-wide">:: Summary of Fees</h2>
               </div>
@@ -855,7 +855,7 @@ export default function RegistrationForm() {
               <div class="p-6">
                 <div class="grid md:grid-cols-3 gap-6 text-sm">
                   {/* Wallet Before */}
-                  <div class="text-center p-4 bg-white rounded-lg border border-purple-100">
+                  <div class="text-center p-4 bg-white rounded-lg border border-purple-100 print-compact">
                     <span class="block text-xs uppercase tracking-wider text-gray-500 mb-2">Portal Wallet (Before)</span>
                     <span class="block text-xl font-bold font-mono text-purple-900">
                       {formatter.format(parseInt(openingBalance()))}
@@ -863,7 +863,7 @@ export default function RegistrationForm() {
                   </div>
                   
                   {/* Total Charges */}
-                  <div class="text-center p-4 bg-white rounded-lg border border-purple-100">
+                  <div class="text-center p-4 bg-white rounded-lg border border-purple-100 print-compact">
                     <span class="block text-xs uppercase tracking-wider text-gray-500 mb-2">Total Charges (Added)</span>
                     <span class="block text-xl font-bold font-mono text-amber-700">
                       {formatter.format(parseInt(addedTotalProgFee()))}
@@ -896,12 +896,12 @@ export default function RegistrationForm() {
             </section>
 
             {/* ===== SIGNATURES & QR ===== */}
-            <section class="border-2 border-purple-100 rounded-xl overflow-hidden">
+            <section class="border-2 border-purple-100 rounded-xl overflow-hidden no-break">
               <div class="bg-purple-900 text-amber-100 px-5 py-3">
                 <h2 class="font-bold text-lg tracking-wide">:: Authorizations</h2>
               </div>
               
-              <div class="p-6 bg-white">
+              <div class="p-6 bg-white print-compact">
                 <div class="grid md:grid-cols-5 gap-6 items-end">
                   {/* Signature Blocks */}
                   <div class="md:col-span-4 grid sm:grid-cols-2 gap-6">

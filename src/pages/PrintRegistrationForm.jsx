@@ -489,7 +489,7 @@ export default function PrintRegistrationForm() {
                 </div>
 
                 {/* Main Form Container - Academic Style */}
-                <div class="bg-white text-gray-800 font-serif max-w-5xl mx-auto my-6 shadow-lg print:shadow-none print:m-0">
+                <div class="bg-white text-gray-800 font-serif max-w-5xl mx-auto my-6 shadow-lg print:shadow-none print:m-0 print-compact">
                   
                   {/* Institutional Header */}
                   <header class="border-b-4 border-purple-900 bg-gradient-to-r from-purple-50 to-amber-50 px-8 py-6">
@@ -543,11 +543,11 @@ export default function PrintRegistrationForm() {
                   <div class="px-8 py-6 space-y-8">
                     
                     {/* ===== PERSONAL DATA SECTION ===== */}
-                    <section class="border-2 border-purple-100 rounded-xl overflow-hidden">
+                    <section class="border-2 border-purple-100 rounded-xl overflow-hidden no-break">
                       <div class="bg-purple-900 text-amber-100 px-5 py-3 flex items-center justify-between">
                         <h2 class="font-bold text-lg tracking-wide">:: Personal Data</h2>
                         {/* Passport Photo */}
-                        <div class="w-24 h-24 border-2 border-amber-300 rounded-lg overflow-hidden bg-white shadow-inner">
+                        <div class="w-24 h-24 border-2 border-amber-300 rounded-lg overflow-hidden bg-white shadow-inner print-compact">
                           <img
                             src={getOptPassport(registrationData().user.passport_url)}
                             class="w-full h-full object-cover"
@@ -556,7 +556,7 @@ export default function PrintRegistrationForm() {
                         </div>
                       </div>
                       
-                      <div class="p-5 bg-white">
+                      <div class="p-5 bg-white print-compact">
                         <div class="grid grid-cols-2 md:grid-cols-4 gap-x-6 gap-y-4 text-sm">
                           <div>
                             <span class="text-gray-500 block text-xs uppercase tracking-wide">Full Name</span>
@@ -619,12 +619,12 @@ export default function PrintRegistrationForm() {
                     </section>
 
                     {/* ===== SEMINARY CHARGES SECTION ===== */}
-                    <section class="border-2 border-purple-100 rounded-xl overflow-hidden">
+                    <section class="border-2 border-purple-100 rounded-xl overflow-hidden no-break">
                       <div class="bg-purple-900 text-amber-100 px-5 py-3">
                         <h2 class="font-bold text-lg tracking-wide">:: Seminary Charges</h2>
                       </div>
                       
-                      <div class="p-5 bg-white">
+                      <div class="p-5 bg-white print-compact">
                         <table class="w-full text-sm">
                           <thead>
                             <tr class="border-b-2 border-purple-200">
@@ -732,14 +732,14 @@ export default function PrintRegistrationForm() {
                     </section>
 
                     {/* ===== PROGRAMME / COURSES SECTION ===== */}
-                    <section class="border-2 border-purple-100 rounded-xl overflow-hidden">
+                    <section class="border-2 border-purple-100 rounded-xl overflow-hidden no-break">
                       <div class="bg-purple-900 text-amber-100 px-5 py-3">
                         <h2 class="font-bold text-lg tracking-wide">
                           :: Programme ({registrationData().student.programme})
                         </h2>
                       </div>
                       
-                      <div class="p-5 bg-white overflow-x-auto">
+                      <div class="p-5 bg-white overflow-x-auto print-compact">
                         <table class="w-full text-sm min-w-[600px]">
                           <thead>
                             <tr class="border-b-2 border-purple-200 bg-purple-50">
@@ -947,7 +947,7 @@ export default function PrintRegistrationForm() {
                         <h2 class="font-bold text-lg tracking-wide">:: Authorizations</h2>
                       </div>
                       
-                      <div class="p-6 bg-white">
+                      <div class="p-6 bg-white print-compact">
                         <div class="grid md:grid-cols-5 gap-6 items-end">
                           {/* Signature Blocks */}
                           <div class="md:col-span-4 grid sm:grid-cols-2 gap-6">
@@ -967,7 +967,7 @@ export default function PrintRegistrationForm() {
                           
                           {/* QR Code */}
                           <div class="text-center">
-                            <div class="inline-block p-2 border-2 border-amber-300 rounded-lg bg-white shadow-sm">
+                            <div class="inline-block p-2 border-2 border-amber-300 rounded-lg bg-white shadow-sm print-compact">
                               <img
                                 class="w-20 h-20"
                                 src={`https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=${registrationData().formNumber()}`}

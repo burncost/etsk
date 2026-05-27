@@ -1,6 +1,316 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.bg {
+  background-image: url("./assets/JETS-banner.jpg");
+  background-size: cover;
+  height: 100%;
+}
+
+.blue-btn {
+  background-color: #010160;
+  color: #ffffff;
+  border-radius: 5px;
+}
+
+.green-btn {
+  background-color: #016037;
+  color: #ffffff;
+  border-radius: 5px;
+}
+
+.red-btn {
+  background-color: #b00404;
+  color: #ffffff;
+  border-radius: 5px;
+}
+
+.orange-btn {
+  background-color: #ff8000;
+  color: #ffffff;
+  border-radius: 5px;
+}
+
+.gray-btn {
+  background-color: #696565;
+  color: #ffffff;
+  border-radius: 5px;
+}
+
+.gray2-btn {
+  background-color: #313030;
+  color: #ffffff;
+  border-radius: 5px;
+}
+
+.is-invalid {
+  border: rgb(147 51 234) solid 1px;
+}
+
+.menu-h {
+  overflow-y: scroll;
+  height: 100vh; /* Fixed: was "100 vh" */
+  scrollbar-color: red white;
+  scrollbar-width: thin;
+}
+
+.library-resources a {
+  color: #ff3300;
+  border-bottom: #000000 solid 1px;
+}
+
+.library-resources a:hover {
+  color: #000000;
+}
+
+.library-resources p {
+  margin: 6px 0;
+}
+
+/*PRINT OPTIMIZATIONS - A4 SINGLE PAGE*/
+@media print {
+  /* Page Setup */
+  @page {
+    size: A4;
+    margin: 6mm 8mm; /* Tight but safe margins for A4 */
+  }
+
+  /* Base Print Styles */
+  body {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    font-size: 9.5pt !important;
+    line-height: 1.25 !important;
+    color: #1a1a1a !important;
+    background: #fff !important;
+  }
+
+  /* Hide non-essential elements */
+  .no-print,
+  footer.no-print,
+  button,
+  [onclick],
+  .cursor-pointer {
+    display: none !important;
+  }
+
+  /* Remove shadows, gradients for cleaner print */
+  .shadow-lg,
+  .shadow-md,
+  .shadow-sm {
+    box-shadow: none !important;
+  }
+
+  /* Compact container for print */
+  .print-compact {
+    width: 100% !important;
+    max-width: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    box-shadow: none !important;
+  }
+
+  /* Header compact */
+  .print-compact header {
+    padding: 2mm 3mm !important;
+    border-bottom-width: 1.5pt !important;
+  }
+  .print-compact header h1 {
+    font-size: 11pt !important;
+    line-height: 1.1 !important;
+    margin: 0 !important;
+  }
+  .print-compact header p {
+    font-size: 8.5pt !important;
+    margin: 1px 0 0 !important;
+  }
+  .print-compact .form-badge {
+    padding: 1mm 2mm !important;
+    font-size: 8.5pt !important;
+  }
+  .print-compact .session-bar {
+    gap: 2mm !important;
+    font-size: 8pt !important;
+    margin-top: 1mm !important;
+    padding-top: 1mm !important;
+  }
+
+  /* Section styling */
+  .print-compact section {
+    margin-bottom: 3mm !important;
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+  }
+  .print-compact .section-header {
+    padding: 1.5mm 3mm !important;
+    font-size: 9.5pt !important;
+  }
+
+  /* Personal data grid - 2 column compact */
+  .print-compact .personal-grid {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 1mm 3mm !important;
+    padding: 2mm !important;
+    font-size: 8.5pt !important;
+  }
+  .print-compact .personal-grid .label {
+    font-size: 7.5pt !important;
+    color: #555 !important;
+    display: block !important;
+    margin-bottom: 0.5px !important;
+  }
+  .print-compact .personal-grid span {
+    display: block !important;
+    line-height: 1.1 !important;
+  }
+  .print-compact .passport-frame {
+    width: 35mm !important;
+    height: 35mm !important;
+    border-width: 1pt !important;
+  }
+
+  /* Tables - Ultra compact */
+  .print-compact table {
+    font-size: 8pt !important;
+    width: 100% !important;
+    border-collapse: collapse !important;
+  }
+  .print-compact th,
+  .print-compact td {
+    padding: 1.5px 3px !important;
+    line-height: 1.15 !important;
+    vertical-align: middle !important;
+  }
+  .print-compact th {
+    font-size: 8pt !important;
+    padding: 2px 3px !important;
+    font-weight: 600 !important;
+  }
+  .print-compact .courses-table {
+    font-size: 7.5pt !important;
+  }
+  .print-compact .courses-table th,
+  .print-compact .courses-table td {
+    padding: 1px 2px !important;
+  }
+  .print-compact .font-mono {
+    font-size: 7.5pt !important;
+  }
+
+  /* Subtotal/total rows */
+  .print-compact tfoot tr,
+  .print-compact .subtotal-row {
+    font-size: 8.5pt !important;
+    padding: 2px 3px !important;
+  }
+
+  /* Summary section - 3 column compact */
+  .print-compact .summary-grid {
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 2mm !important;
+  }
+  .print-compact .summary-card {
+    padding: 2mm !important;
+    text-align: center !important;
+    border-width: 0.5pt !important;
+  }
+  .print-compact .summary-card .label {
+    font-size: 7.5pt !important;
+    margin-bottom: 1px !important;
+  }
+  .print-compact .summary-card .amount {
+    font-size: 10.5pt !important;
+    font-weight: 700 !important;
+  }
+
+  /* Signatures - compact grid */
+  .print-compact .signature-grid {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 2mm !important;
+    align-items: end !important;
+  }
+  .print-compact .signature-block {
+    padding: 1mm !important;
+    text-align: center !important;
+  }
+  .print-compact .signature-line {
+    border-bottom: 0.5pt dashed #888 !important;
+    height: 10mm !important;
+    margin-bottom: 1mm !important;
+  }
+  .print-compact .signature-label {
+    font-size: 7.5pt !important;
+    color: #444 !important;
+  }
+  .print-compact .signature-role {
+    font-size: 8pt !important;
+    font-weight: 500 !important;
+  }
+
+  /* QR Code */
+  .print-compact .qr-frame {
+    width: 32mm !important;
+    height: 32mm !important;
+    padding: 1mm !important;
+    border-width: 0.5pt !important;
+  }
+  .print-compact .qr-frame img {
+    width: 100% !important;
+    height: 100% !important;
+    display: block !important;
+  }
+  .print-compact .qr-label {
+    font-size: 7pt !important;
+    margin-top: 1mm !important;
+  }
+
+  /* Utility classes for print */
+  .print-hidden {
+    display: none !important;
+  }
+  .print-visible {
+    display: block !important;
+  }
+  .no-break {
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+  }
+  .force-break-after {
+    break-after: page !important;
+    page-break-after: always !important;
+  }
+
+  /* Color adjustments for print readability */
+  .text-purple-900 { color: #2d1b4d !important; }
+  .text-amber-700 { color: #854d0e !important; }
+  .bg-purple-900 { background-color: #2d1b4d !important; }
+  .bg-amber-50 { background-color: #fffbeb !important; }
+  .border-purple-200 { border-color: #d8b4fe !important; }
+  
+  /* Ensure borders print */
+  .border, .border-t, .border-b, .border-l, .border-r {
+    border-color: #333 !important;
+  }
+}
+
+
+/* @tailwind base;
+@tailwind components;
+@tailwind utilities;
 body {
   margin: 0;
   padding: 0;
@@ -81,4 +391,4 @@ body {
 
 .library-resources p {
   margin: 6px 0;
-}
+} */
