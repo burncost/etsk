@@ -722,85 +722,86 @@ export default function PrintRegistrationForm() {
                               </Show>
                             </td>
                           </tr>
-                      </Show>
+                        </Show>
 
-                      {/*populate admin/seminary charges */}
-                      <Show when={(modeOfStudy()==="Virtual")}>
-                        <For each={[
-                          "Departmental Charges",
-                          "ECWA Education Dept Levy", 
-                          "Development for Online Capacity",
-                          "Internet and Portal Access"
-                        ]}>
-                          {(chargeName, i) => (
-                            <tr class="border-b border-black">
-                              <td class="p-4 border-r border-black font-semibold">
-                                {i() + 1}.
-                              </td>
-                              <td class="p-4 border-r border-black">
-                                {chargeName}
-                              </td>
-                              <td class="p-4">
-                                <Show when={registrationData().adminCharges[chargeName]}>
-                                  {formatter.format(registrationData().adminCharges[chargeName][0])}
-                                  <Show
-                                    when={
-                                      JSON.parse(localStorage.getItem("jetsUser")).surname === "ict" ||
-                                      JSON.parse(localStorage.getItem("jetsUser")).surname === "bursar"
-                                    }
-                                  >
-                                    &nbsp;[
-                                    <span
-                                      onClick={() => editSingleCharge(chargeName)}
-                                      class="text-red-600 font-bold hover:opacity-60 cursor-pointer"
+                        {/*populate admin/seminary charges */}
+                        <Show when={(modeOfStudy()==="Virtual")}>
+                          <For each={[
+                            "Departmental Charges",
+                            "ECWA Education Dept Levy", 
+                            "Development for Online Capacity",
+                            "Internet and Portal Access"
+                          ]}>
+                            {(chargeName, i) => (
+                              <tr class="border-b border-black">
+                                <td class="p-4 border-r border-black font-semibold">
+                                  {i() + 1}.
+                                </td>
+                                <td class="p-4 border-r border-black">
+                                  {chargeName}
+                                </td>
+                                <td class="p-4">
+                                  <Show when={registrationData().adminCharges[chargeName]}>
+                                    {formatter.format(registrationData().adminCharges[chargeName][0])}
+                                    <Show
+                                      when={
+                                        JSON.parse(localStorage.getItem("jetsUser")).surname === "ict" ||
+                                        JSON.parse(localStorage.getItem("jetsUser")).surname === "bursar"
+                                      }
                                     >
-                                      Edit
-                                    </span>
-                                    ]
+                                      &nbsp;[
+                                      <span
+                                        onClick={() => editSingleCharge(chargeName)}
+                                        class="text-red-600 font-bold hover:opacity-60 cursor-pointer"
+                                      >
+                                        Edit
+                                      </span>
+                                      ]
+                                    </Show>
                                   </Show>
-                                </Show>
-                              </td>
-                            </tr>
-                          )}
-                        </For>
-                        
-                        {/* Sub Total Row */}
-                        <tr class="border-b border-black">
-                          <td class="p-4 border-r border-black font-semibold" colSpan={2}>
-                            Sub Total
-                          </td>
-                          <td class="p-4 font-semibold">
-                            <Show when={registrationData().adminCharges["total"]}>
-                              {pickedCourses.length < 2
-                                ? formatter.format(parseInt(registrationData().adminCharges["total"][0]) - parseInt(0))
-                                : formatter.format(parseInt(registrationData().adminCharges["total"][0]))}
-                            </Show>
-                          </td>
-                        </tr>
-                      </Show>
+                                </td>
+                              </tr>
+                            )}
+                          </For>
+                          
+                          {/* Sub Total Row */}
+                          <tr class="border-b border-black">
+                            <td class="p-4 border-r border-black font-semibold" colSpan={2}>
+                              Sub Total
+                            </td>
+                            <td class="p-4 font-semibold">
+                              <Show when={registrationData().adminCharges["total"]}>
+                                {pickedCourses.length < 2
+                                  ? formatter.format(parseInt(registrationData().adminCharges["total"][0]) - parseInt(0))
+                                  : formatter.format(parseInt(registrationData().adminCharges["total"][0]))}
+                              </Show>
+                            </td>
+                          </tr>
+                        </Show>
 
-                      {/* Spacer row - just a regular <tr>, no nested tbody */}
-                      <tr>
-                        <td colSpan={3} class="h-6"></td>
-                      </tr>
+                        {/* Spacer row - just a regular <tr>, no nested tbody */}
+                        <tr>
+                          <td colSpan={3} class="h-6"></td>
+                        </tr>
 
-                      {/* Affiliation Fee section - just <tr> elements, no nested thead */}
-                      <Show when={registrationData().student.affiliation_status === "yes" && period.semester==="1st"}>
-                        <tr class="bg-white border-b border-black text-blue-900">                                  
-                          <th class="p-1 text-left uppercase" colSpan={3}>
-                            :: AFFILIATION FEE
-                          </th>                                  
-                        </tr>
-                        <tr class="border-b border-black">
-                          <td class="p-4 border-r border-black font-semibold" colSpan={2}>
-                            Sub Total
-                          </td>
-                          <td class="p-4 font-semibold">
-                            {formatter.format("40000")}
-                          </td>
-                        </tr>
-                      </Show>
-                      </table> 
+                        {/* Affiliation Fee section - just <tr> elements, no nested thead */}
+                        <Show when={registrationData().student.affiliation_status === "yes" && period.semester==="1st"}>
+                          <tr class="bg-white border-b border-black text-blue-900">                                  
+                            <th class="p-1 text-left uppercase" colSpan={3}>
+                              :: AFFILIATION FEE
+                            </th>                                  
+                          </tr>
+                          <tr class="border-b border-black">
+                            <td class="p-4 border-r border-black font-semibold" colSpan={2}>
+                              Sub Total
+                            </td>
+                            <td class="p-4 font-semibold">
+                              {formatter.format("40000")}
+                            </td>
+                          </tr>
+                        </Show>
+                      </tbody>
+                    </table> 
                   </div>
                   <div class="overflow-x-auto">
                     <table cellPadding={0} cellSpacing={0} class="w-full">
