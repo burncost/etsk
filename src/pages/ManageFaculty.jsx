@@ -126,7 +126,7 @@ export default function ManageFaculty() {
     setIsProcessing(true);
 
     var email =
-      formData().first_name + "." + formData().surname + "@jets.edu.ng";
+      formData().first_name + "." + formData().surname + "@etsk.edu.ng";
     email = email.toLowerCase().replace(/\s/g, "");
     try {
       //Call API here:

@@ -266,14 +266,14 @@ export default function CompleteProfile() {
             result.response.first_name +
               "." +
               result.response.username +
-              "@online.jets.edu.ng"
+              "@online.etsk.edu.ng"
             );            
           }else{
             setStudentEmail(
             result.response.first_name +
               "." +
               result.response.username +
-              "@jets.edu.ng"
+              "@etsk.edu.ng"
             );            
           }          
           setStudentId(result.response.username);
