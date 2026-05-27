@@ -690,6 +690,7 @@ export default function RegistrationForm() {
     setEditChargeVal(val);
   };
 
+  console.log(`Admin charges: ${adminCharges()}`)
   const params = useParams();
 
   const [registrationData] = createResource(registrationFormData);
@@ -2404,7 +2405,7 @@ export default function RegistrationForm() {
                                         "jets staff"
                                       }
                                     >
-                                      (JETS Staff)
+                                      (ETSK Staff)
                                     </Show>
                                   </td>
                                   <td class="font-semibold p-4 border-r border-black">

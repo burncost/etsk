@@ -210,35 +210,65 @@ export default function RegistrationForm() {
     for (let i = 0; i < arr.length; i++) {
       try {
         var _denomination = student.denomination
-        var _department = student.department
+        var _intl = student.special_student_category
         var _programme_category = student.programme_category
-        switch(true){
-          case _department==="Linguistics" && (_programme_category === "Masters Programme" || _programme_category === "PGDT Programme"):
-            setDenomination("Linguistics-pg");
-            break;
-          case _department==="Linguistics" && _programme_category === "Bachelor of Arts Programme":
-            setDenomination("Linguistics-ug");
-            break;
-          case modeOfStudy()==="Virtual" && _denomination === "ECWA":
-            setDenomination("ECWA-Online");
-            break;
-          case modeOfStudy()==="Virtual" && _denomination === "Non-ECWA":
-            setDenomination("Non-ECWA-Online");
-            break;
-          case modeOfStudy()==="Weekend" && _denomination === "Non-ECWA" && prg()==='UG':
-            setDenomination("Non-ECWA-Weekend-UG");
-            break;
-          case modeOfStudy()==="Weekend" && _denomination === "ECWA" && prg()==='UG':
-            setDenomination("ECWA-Weekend-UG");
-            break;
-          case modeOfStudy()==="Weekend" && _denomination === "Non-ECWA":
-            setDenomination("Non-ECWA-Weekend");
-            break;
-          case modeOfStudy()==="Weekend" && _denomination === "ECWA":
-            setDenomination("ECWA-Weekend");
-            break;          
-          default:
-            setDenomination(_denomination)
+
+        const pgProgrammes = [
+          "PGDT Programme",
+          "Masters Programme",
+          "Master of Divinity Programme"
+        ];
+
+        if (pgProgrammes.includes(_programme_category)) {
+
+          if (_intl === "yes") {
+            setDenomination("INTL-PG");
+          } else if (_denomination === "ECWA") {
+            setDenomination("ECWA-PG");
+          } else if (_denomination === "Non-ECWA") {
+            setDenomination("Non-ECWA-PG");
+          }
+
+        } else if (_programme_category === "Bachelor of Arts Programme") {
+
+          if (_intl === "yes") {
+            setDenomination("INTL-UG");
+          } else if (_denomination === "ECWA") {
+            setDenomination("ECWA-UG");
+          } else if (_denomination === "Non-ECWA") {
+            setDenomination("Non-ECWA-UG");
+          }
+
+        } else if (_programme_category === "Diploma Programme") {
+
+          if (_intl === "yes") {
+            setDenomination("INTL-DIP");
+          } else if (_denomination === "ECWA") {
+            setDenomination("ECWA-DIP");
+          } else if (_denomination === "Non-ECWA") {
+            setDenomination("Non-ECWA-DIP");
+          }
+
+        } else if (_programme_category === "Certificate Programme") {
+
+          if (_intl === "yes") {
+            setDenomination("INTL-CERT");
+          } else if (_denomination === "ECWA") {
+            setDenomination("ECWA-CERT");
+          } else if (_denomination === "Non-ECWA") {
+            setDenomination("Non-ECWA-CERT");
+          }
+
+        } else if (_programme_category === "Basic English") {
+
+          if (_intl === "yes") {
+            setDenomination("INTL-BASIC");
+          } else if (_denomination === "ECWA") {
+            setDenomination("ECWA-BASIC");
+          } else if (_denomination === "Non-ECWA") {
+            setDenomination("Non-ECWA-BASIC");
+          }
+
         }  
 
         const res = await fetch(VITE_API_URL + "/api/course/" + arr[i], {
@@ -1029,7 +1059,7 @@ export default function RegistrationForm() {
                                   />
                                   {/* QRCode from: https://goqr.me/api/ */}
                                   <span class="text-xs text-right">
-                                    QRJETS {formNumber()}
+                                    QRETSK {formNumber()}
                                   </span>
                                 </div>
                               </div>

@@ -170,7 +170,7 @@ export default function AdminDashboard() {
       <Title>Admin Dashboard - ECWA Theological Seminary, KAGORO (ETSK)</Title>
       <Meta
         name="description"
-        content="Admin dashboard on ECWA Theological  Seminary, Jos (JETS)"
+        content="Admin dashboard on ECWA Theological Seminary, Kagoro (ETSK)"
       />
       <div class="text-sm">
         <Header />

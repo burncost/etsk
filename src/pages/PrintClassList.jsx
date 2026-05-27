@@ -272,7 +272,7 @@ export default function PrintClassList() {
     <MetaProvider>
       <Title>
         {searchParams.cat === "list" ? "Class List" : "Grade Sheet"} - ECWA
-        Theological Seminary, Jos (JETS)
+        Theological Seminary, Kagoro (ETSK)
       </Title>
       <Meta
         name="description"

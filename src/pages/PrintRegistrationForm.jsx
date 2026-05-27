@@ -199,9 +199,9 @@ export default function PrintRegistrationForm() {
     for (let i = 0; i < arr.length; i++) {
       try {
         var _denomination = student.denomination
-        var _department = student.department
+        var _intl = student.special_student_category
         var _programme_category = student.programme_category
-        
+
         const pgProgrammes = [
           "PGDT Programme",
           "Masters Programme",
