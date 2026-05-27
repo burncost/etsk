@@ -662,69 +662,69 @@ export default function PrintRegistrationForm() {
                         </tr>
                         {/*populate in person admin/seminary charges */}
                         <Show when={(modeOfStudy() !== "Virtual")}>
-                        <For each={[
-                          "Compound Improvement",
-                          "Student Council/Departmental Fees",
-                          "Educators Levy",
-                          "ID card",
-                          "Medical Deposit",
-                          "Matriculation Fee",
-                          "Sport fee",
-                          "Library Charges",
-                          "Administrative Charges",
-                          "Cafe Fee",
-                          "Utility",
-                          "ACTEA Accreditation/Services",
-                          "Seminary Book",
-                        ]}>
-                          {(chargeName, i) => (
-                            <tr class="border-b border-black">
-                              <td class="p-4 border-r border-black font-semibold">
-                                {i() + 1}.
-                              </td>
-                              <td class="p-4 border-r border-black">
-                                {chargeName}
-                              </td>
-                              <td class="p-4">
-                                <Show when={registrationData().adminCharges[chargeName]}>
-                                  {formatter.format(registrationData().adminCharges[chargeName][0])}
-                                  <Show
-                                    when={
-                                      JSON.parse(localStorage.getItem("jetsUser")).surname === "ict" ||
-                                      JSON.parse(localStorage.getItem("jetsUser")).surname === "bursar"
-                                    }
-                                  >
-                                    &nbsp;[
-                                    <span
-                                      onClick={() => editSingleCharge(chargeName)}
-                                      class="text-red-600 font-bold hover:opacity-60 cursor-pointer"
+                          <For each={[
+                            "Compound Improvement",
+                            "Student Council/Departmental Fees",
+                            "Educators Levy",
+                            "ID card",
+                            "Medical Deposit",
+                            "Matriculation Fee",
+                            "Sport fee",
+                            "Library Charges",
+                            "Administrative Charges",
+                            "Cafe Fee",
+                            "Utility",
+                            "ACTEA Accreditation/Services",
+                            "Seminary Book",
+                          ]}>
+                            {(chargeName, i) => (
+                              <tr class="border-b border-black">
+                                <td class="p-4 border-r border-black font-semibold">
+                                  {i() + 1}.
+                                </td>
+                                <td class="p-4 border-r border-black">
+                                  {chargeName}
+                                </td>
+                                <td class="p-4">
+                                  <Show when={registrationData().adminCharges[chargeName]}>
+                                    {formatter.format(registrationData().adminCharges[chargeName][0])}
+                                    <Show
+                                      when={
+                                        JSON.parse(localStorage.getItem("jetsUser")).surname === "ict" ||
+                                        JSON.parse(localStorage.getItem("jetsUser")).surname === "bursar"
+                                      }
                                     >
-                                      Edit
-                                    </span>
-                                    ]
+                                      &nbsp;[
+                                      <span
+                                        onClick={() => editSingleCharge(chargeName)}
+                                        class="text-red-600 font-bold hover:opacity-60 cursor-pointer"
+                                      >
+                                        Edit
+                                      </span>
+                                      ]
+                                    </Show>
                                   </Show>
-                                </Show>
-                              </td>
-                            </tr>
-                          )}
-                        </For>
-                        
-                        {/* Sub Total Row */}
-                        <tr class="border-b border-black">
-                          <td class="p-4 border-r border-black font-semibold" colSpan={2}>
-                            Sub Total
-                          </td>
-                          <td class="p-4 font-semibold">
-                            <Show when={registrationData().adminCharges["total"]}>
-                              {pickedCourses.length < 2
-                                ? formatter.format(parseInt(registrationData().adminCharges["total"][0]) - parseInt(0))
-                                : formatter.format(parseInt(registrationData().adminCharges["total"][0]))}
-                            </Show>
-                          </td>
-                        </tr>
+                                </td>
+                              </tr>
+                            )}
+                          </For>
+                          
+                          {/* Sub Total Row */}
+                          <tr class="border-b border-black">
+                            <td class="p-4 border-r border-black font-semibold" colSpan={2}>
+                              Sub Total
+                            </td>
+                            <td class="p-4 font-semibold">
+                              <Show when={registrationData().adminCharges["total"]}>
+                                {pickedCourses.length < 2
+                                  ? formatter.format(parseInt(registrationData().adminCharges["total"][0]) - parseInt(0))
+                                  : formatter.format(parseInt(registrationData().adminCharges["total"][0]))}
+                              </Show>
+                            </td>
+                          </tr>
                       </Show>
 
-                      {/*populate online admin/seminary charges */}
+                      {/*populate admin/seminary charges */}
                       <Show when={(modeOfStudy()==="Virtual")}>
                         <For each={[
                           "Departmental Charges",
@@ -778,38 +778,29 @@ export default function PrintRegistrationForm() {
                           </td>
                         </tr>
                       </Show>
-                      <tbody>
-                          <tr>
-                            <td colSpan={3} class="h-6"></td>
-                          </tr>
-                        </tbody>
 
-                      <thead>
-                        <Show when={registrationData().student.affiliation_status === "yes" && period.semester==="1st"}>
-                          <tr class="bg-white border-b border-black text-blue-900">                                  
-                            <th
-                              class="p-1 text-left uppercase"
-                              colSpan={3}
-                            >
-                              :: AFFILIATION FEE
-                            </th>                                  
-                          </tr>
-                          <tr class="border-b border-black">
-                            <td
-                              class="p-4 border-r border-black font-semibold"
-                              colSpan={2}
-                            >
-                              Sub Total
-                            </td>
-                            <td class="p-4 font-semibold">
-                                {formatter.format("40000"
-                                    )}
-                            </td>
-                            <td class="p-4"></td>
-                          </tr>
-                          </Show>                              
-                        </thead>  
-                    </table>
+                      {/* Spacer row - just a regular <tr>, no nested tbody */}
+                      <tr>
+                        <td colSpan={3} class="h-6"></td>
+                      </tr>
+
+                      {/* Affiliation Fee section - just <tr> elements, no nested thead */}
+                      <Show when={registrationData().student.affiliation_status === "yes" && period.semester==="1st"}>
+                        <tr class="bg-white border-b border-black text-blue-900">                                  
+                          <th class="p-1 text-left uppercase" colSpan={3}>
+                            :: AFFILIATION FEE
+                          </th>                                  
+                        </tr>
+                        <tr class="border-b border-black">
+                          <td class="p-4 border-r border-black font-semibold" colSpan={2}>
+                            Sub Total
+                          </td>
+                          <td class="p-4 font-semibold">
+                            {formatter.format("40000")}
+                          </td>
+                        </tr>
+                      </Show>
+                      </table> 
                   </div>
                   <div class="overflow-x-auto">
                     <table cellPadding={0} cellSpacing={0} class="w-full">
