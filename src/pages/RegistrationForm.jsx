@@ -690,7 +690,6 @@ export default function RegistrationForm() {
     setEditChargeVal(val);
   };
 
-  console.log(`Admin charges: ${adminCharges()}`)
   const params = useParams();
 
   const [registrationData] = createResource(registrationFormData);
@@ -1388,43 +1387,43 @@ export default function RegistrationForm() {
                                 </tr>                                    
                               </Show>
 
-                              {/* load seminary charges for in-person students */}
-                              <Show when={(modeOfStudy() !== "Virtual")}>
+                            <Show when={(modeOfStudy() !== "Virtual")}>
+                            <For each={[
+                              "SUG Charges",
+                              "Health Insurance",
+                              "Departmental Charges",
+                              "Examination/Stationery",
+                              "Administrative Services",
+                              "Campus Development Levy",
+                              "ECWA Education Dept Levy",
+                              "Library Use and Services",
+                              "New Student Matriculation",
+                              "ICT Dev and Internet Access",
+                              "Seminary Student/Library ID Card",
+                              "Academic Catalogue",
+                              "Late Registration",
+                              "ACTEA Accreditation/Services"
+                            ]}>
+                              {(chargeName, i) => (
                                 <tr class="border-b border-black">
                                   <td class="p-4 border-r border-black font-semibold">
-                                    1.
+                                    {i() + 1}.
                                   </td>
                                   <td class="p-4 border-r border-black">
-                                    SUG Charges
+                                    {chargeName}
                                   </td>
                                   <td class="p-4">
-                                    <Show
-                                      when={
-                                        registrationData().adminCharges[
-                                          "SUG Charges"
-                                        ]
-                                      }
-                                    >
-                                      {formatter.format(
-                                        registrationData().adminCharges[
-                                          "SUG Charges"
-                                        ][0]
-                                      )}
+                                    <Show when={registrationData().adminCharges[chargeName]}>
+                                      {formatter.format(registrationData().adminCharges[chargeName][0])}
                                       <Show
                                         when={
-                                          JSON.parse(
-                                            localStorage.getItem("jetsUser")
-                                          ).surname === "ict" ||
-                                          JSON.parse(
-                                            localStorage.getItem("jetsUser")
-                                          ).surname === "bursar"
+                                          JSON.parse(localStorage.getItem("jetsUser")).surname === "ict" ||
+                                          JSON.parse(localStorage.getItem("jetsUser")).surname === "bursar"
                                         }
                                       >
                                         &nbsp;[
                                         <span
-                                          onClick={() => {
-                                            editSingleCharge("SUG Charges");
-                                          }}
+                                          onClick={() => editSingleCharge(chargeName)}
                                           class="text-red-600 font-bold hover:opacity-60 cursor-pointer"
                                         >
                                           Edit
@@ -1434,634 +1433,23 @@ export default function RegistrationForm() {
                                     </Show>
                                   </td>
                                 </tr>
-                                <tr class="border-b border-black">
-                                  <td class="p-4 border-r border-black font-semibold">
-                                    2.
-                                  </td>
-                                  <td class="p-4 border-r border-black">
-                                    Health Insurance
-                                  </td>
-                                  <td class="p-4">
-                                    <Show
-                                      when={
-                                        registrationData().adminCharges[
-                                          "Health Insurance"
-                                        ]
-                                      }
-                                    >
-                                      {formatter.format(
-                                        registrationData().adminCharges[
-                                          "Health Insurance"
-                                        ][0]
-                                      )}
-                                      <Show
-                                        when={
-                                          JSON.parse(
-                                            localStorage.getItem("jetsUser")
-                                          ).surname === "ict" ||
-                                          JSON.parse(
-                                            localStorage.getItem("jetsUser")
-                                          ).surname === "bursar"
-                                        }
-                                      >
-                                        &nbsp;[
-                                        <span
-                                          onClick={() => {
-                                            editSingleCharge("Health Insurance");
-                                          }}
-                                          class="text-red-600 font-bold hover:opacity-60 cursor-pointer"
-                                        >
-                                          Edit
-                                        </span>
-                                        ]
-                                      </Show>
-                                    </Show>
-                                  </td>
-                                </tr>
-                                <tr class="border-b border-black">
-                                  <td class="p-4 border-r border-black font-semibold">
-                                    3.
-                                  </td>
-                                  <td class="p-4 border-r border-black">
-                                    Departmental Charges
-                                  </td>
-                                  <td class="p-4">
-                                    <Show
-                                      when={
-                                        registrationData().adminCharges[
-                                          "Departmental Charges"
-                                        ]
-                                      }
-                                    >
-                                      {formatter.format(
-                                        registrationData().adminCharges[
-                                          "Departmental Charges"
-                                        ][0]
-                                      )}       
-                                      {/* {formatter.format(0)} */}
-                                      <Show
-                                        when={
-                                          JSON.parse(
-                                            localStorage.getItem("jetsUser")
-                                          ).surname === "ict" ||
-                                          JSON.parse(
-                                            localStorage.getItem("jetsUser")
-                                          ).surname === "bursar"
-                                        }
-                                      >
-                                        &nbsp;[
-                                        <span
-                                          onClick={() => {
-                                            editSingleCharge(
-                                              "Departmental Charges"
-                                            );
-                                          }}
-                                          class="text-red-600 font-bold hover:opacity-60 cursor-pointer"
-                                        >
-                                          Edit
-                                        </span>
-                                        ]
-                                      </Show>
-                                    </Show>
-                                  </td>
-                                </tr>
-                                <tr class="border-b border-black">
-                                  <td class="p-4 border-r border-black font-semibold">
-                                    4.
-                                  </td>
-                                  <td class="p-4 border-r border-black">
-                                    Examination/Stationery
-                                  </td>
-                                  <td class="p-4">
-                                    <Show
-                                      when={
-                                        registrationData().adminCharges[
-                                          "Examination/Stationery"
-                                        ]
-                                      }
-                                    >
-                                      {formatter.format(
-                                        registrationData().adminCharges[
-                                          "Examination/Stationery"
-                                        ][0]
-                                      )}
-                                      <Show
-                                        when={
-                                          JSON.parse(
-                                            localStorage.getItem("jetsUser")
-                                          ).surname === "ict" ||
-                                          JSON.parse(
-                                            localStorage.getItem("jetsUser")
-                                          ).surname === "bursar"
-                                        }
-                                      >
-                                        &nbsp;[
-                                        <span
-                                          onClick={() => {
-                                            editSingleCharge(
-                                              "Examination/Stationery"
-                                            );
-                                          }}
-                                          class="text-red-600 font-bold hover:opacity-60 cursor-pointer"
-                                        >
-                                          Edit
-                                        </span>
-                                        ]
-                                      </Show>
-                                    </Show>
-                                  </td>
-                                </tr>
-                                <tr class="border-b border-black">
-                                  <td class="p-4 border-r border-black font-semibold">
-                                    5.
-                                  </td>
-                                  <td class="p-4 border-r border-black">
-                                    Administrative Services
-                                  </td>
-                                  <td class="p-4">
-                                    <Show
-                                      when={
-                                        registrationData().adminCharges[
-                                          "Administrative Services"
-                                        ]
-                                      }
-                                    >
-                                      {formatter.format(
-                                        registrationData().adminCharges[
-                                          "Administrative Services"
-                                        ][0]
-                                      )}
-                                      <Show
-                                        when={
-                                          JSON.parse(
-                                            localStorage.getItem("jetsUser")
-                                          ).surname === "ict" ||
-                                          JSON.parse(
-                                            localStorage.getItem("jetsUser")
-                                          ).surname === "bursar"
-                                        }
-                                      >
-                                        &nbsp;[
-                                        <span
-                                          onClick={() => {
-                                            editSingleCharge(
-                                              "Administrative Services"
-                                            );
-                                          }}
-                                          class="text-red-600 font-bold hover:opacity-60 cursor-pointer"
-                                        >
-                                          Edit
-                                        </span>
-                                        ]
-                                      </Show>
-                                    </Show>
-                                  </td>
-                                </tr>
-                                <tr class="border-b border-black">
-                                  <td class="p-4 border-r border-black font-semibold">
-                                    6.
-                                  </td>
-                                  <td class="p-4 border-r border-black">
-                                    Campus Development Levy
-                                  </td>
-                                  <td class="p-4">
-                                    <Show
-                                      when={
-                                        registrationData().adminCharges[
-                                          "Campus Development Levy"
-                                        ]
-                                      }
-                                    >
-                                      {formatter.format(
-                                        registrationData().adminCharges[
-                                          "Campus Development Levy"
-                                        ][0]
-                                      )}
-                                      <Show
-                                        when={
-                                          JSON.parse(
-                                            localStorage.getItem("jetsUser")
-                                          ).surname === "ict" ||
-                                          JSON.parse(
-                                            localStorage.getItem("jetsUser")
-                                          ).surname === "bursar"
-                                        }
-                                      >
-                                        &nbsp;[
-                                        <span
-                                          onClick={() => {
-                                            editSingleCharge(
-                                              "Campus Development Levy"
-                                            );
-                                          }}
-                                          class="text-red-600 font-bold hover:opacity-60 cursor-pointer"
-                                        >
-                                          Edit
-                                        </span>
-                                        ]
-                                      </Show>
-                                    </Show>
-                                  </td>
-                                </tr>
-                                <tr class="border-b border-black">
-                                  <td class="p-4 border-r border-black font-semibold">
-                                    7.
-                                  </td>
-                                  <td class="p-4 border-r border-black">
-                                    ECWA Education Dept Levy
-                                  </td>
-                                  <td class="p-4">
-                                    <Show
-                                      when={
-                                        registrationData().adminCharges[
-                                          "ECWA Education Dept Levy"
-                                        ]
-                                      }
-                                    >
-                                      {formatter.format(
-                                        registrationData().adminCharges[
-                                          "ECWA Education Dept Levy"
-                                        ][0]
-                                      )}
-                                      <Show
-                                        when={
-                                          JSON.parse(
-                                            localStorage.getItem("jetsUser")
-                                          ).surname === "ict" ||
-                                          JSON.parse(
-                                            localStorage.getItem("jetsUser")
-                                          ).surname === "bursar"
-                                        }
-                                      >
-                                        &nbsp;[
-                                        <span
-                                          onClick={() => {
-                                            editSingleCharge(
-                                              "ECWA Education Dept Levy"
-                                            );
-                                          }}
-                                          class="text-red-600 font-bold hover:opacity-60 cursor-pointer"
-                                        >
-                                          Edit
-                                        </span>
-                                        ]
-                                      </Show>
-                                    </Show>
-                                  </td>
-                                </tr>
-                                <tr class="border-b border-black">
-                                  <td class="p-4 border-r border-black font-semibold">
-                                    8.
-                                  </td>
-                                  <td class="p-4 border-r border-black">
-                                    Library Use and Services
-                                  </td>
-                                  <td class="p-4">
-                                    <Show
-                                      when={
-                                        registrationData().adminCharges[
-                                          "Library Use and Services"
-                                        ]
-                                      }
-                                    >
-                                      {formatter.format(
-                                        registrationData().adminCharges[
-                                          "Library Use and Services"
-                                        ][0]
-                                      )}
-                                      <Show
-                                        when={
-                                          JSON.parse(
-                                            localStorage.getItem("jetsUser")
-                                          ).surname === "ict" ||
-                                          JSON.parse(
-                                            localStorage.getItem("jetsUser")
-                                          ).surname === "bursar"
-                                        }
-                                      >
-                                        &nbsp;[
-                                        <span
-                                          onClick={() => {
-                                            editSingleCharge(
-                                              "Library Use and Services"
-                                            );
-                                          }}
-                                          class="text-red-600 font-bold hover:opacity-60 cursor-pointer"
-                                        >
-                                          Edit
-                                        </span>
-                                        ]
-                                      </Show>
-                                    </Show>
-                                  </td>
-                                </tr>
-                                <tr class="border-b border-black">
-                                  <td class="p-4 border-r border-black font-semibold">
-                                    9.
-                                  </td>
-                                  <td class="p-4 border-r border-black">
-                                    New Student Matriculation
-                                  </td>
-                                  <td class="p-4">
-                                    <Show
-                                      when={
-                                        registrationData().adminCharges[
-                                          "New Student Matriculation"
-                                        ]
-                                      }
-                                    >
-                                      {formatter.format(
-                                        registrationData().adminCharges[
-                                          "New Student Matriculation"
-                                        ][0]
-                                      )}
-                                      <Show
-                                        when={
-                                          JSON.parse(
-                                            localStorage.getItem("jetsUser")
-                                          ).surname === "ict" ||
-                                          JSON.parse(
-                                            localStorage.getItem("jetsUser")
-                                          ).surname === "bursar"
-                                        }
-                                      >
-                                        &nbsp;[
-                                        <span
-                                          onClick={() => {
-                                            editSingleCharge(
-                                              "New Student Matriculation"
-                                            );
-                                          }}
-                                          class="text-red-600 font-bold hover:opacity-60 cursor-pointer"
-                                        >
-                                          Edit
-                                        </span>
-                                        ]
-                                      </Show>
-                                    </Show>
-                                  </td>
-                                </tr>
-                                <tr class="border-b border-black">
-                                  <td class="p-4 border-r border-black font-semibold">
-                                    10.
-                                  </td>
-                                  <td class="p-4 border-r border-black">
-                                    ICT Dev and Internet Access
-                                  </td>
-                                  <td class="p-4">
-                                    <Show
-                                      when={
-                                        registrationData().adminCharges[
-                                          "ICT Dev and Internet Access"
-                                        ]
-                                      }
-                                    >
-                                      {formatter.format(
-                                        registrationData().adminCharges[
-                                          "ICT Dev and Internet Access"
-                                        ][0]
-                                      )}
-                                      <Show
-                                        when={
-                                          JSON.parse(
-                                            localStorage.getItem("jetsUser")
-                                          ).surname === "ict" ||
-                                          JSON.parse(
-                                            localStorage.getItem("jetsUser")
-                                          ).surname === "bursar"
-                                        }
-                                      >
-                                        &nbsp;[
-                                        <span
-                                          onClick={() => {
-                                            editSingleCharge(
-                                              "ICT Dev and Internet Access"
-                                            );
-                                          }}
-                                          class="text-red-600 font-bold hover:opacity-60 cursor-pointer"
-                                        >
-                                          Edit
-                                        </span>
-                                        ]
-                                      </Show>
-                                    </Show>
-                                  </td>
-                                </tr>
-                                <tr class="border-b border-black">
-                                  <td class="p-4 border-r border-black font-semibold">
-                                    11.
-                                  </td>
-                                  <td class="p-4 border-r border-black">
-                                    Seminary Student/Library ID Card
-                                  </td>
-                                  <td class="p-4">
-                                    <Show
-                                      when={
-                                        registrationData().adminCharges[
-                                          "Seminary Student/Library ID Card"
-                                        ]
-                                      }
-                                    >
-                                      {formatter.format(
-                                        registrationData().adminCharges[
-                                          "Seminary Student/Library ID Card"
-                                        ][0]
-                                      )}
-                                      <Show
-                                        when={
-                                          JSON.parse(
-                                            localStorage.getItem("jetsUser")
-                                          ).surname === "ict" ||
-                                          JSON.parse(
-                                            localStorage.getItem("jetsUser")
-                                          ).surname === "bursar"
-                                        }
-                                      >
-                                        &nbsp;[
-                                        <span
-                                          onClick={() => {
-                                            editSingleCharge(
-                                              "Seminary Student/Library ID Card"
-                                            );
-                                          }}
-                                          class="text-red-600 font-bold hover:opacity-60 cursor-pointer"
-                                        >
-                                          Edit
-                                        </span>
-                                        ]
-                                      </Show>
-                                    </Show>
-                                  </td>
-                                </tr>
-                                <tr class="border-b border-black">
-                                  <td class="p-4 border-r border-black font-semibold">
-                                    12.
-                                  </td>
-                                  <td class="p-4 border-r border-black">
-                                    Academic Catalogue
-                                  </td>
-                                  <td class="p-4">
-                                    <Show
-                                      when={
-                                        registrationData().adminCharges[
-                                          "Academic Catalogue"
-                                        ]
-                                      }
-                                    >
-                                      {formatter.format(
-                                        registrationData().adminCharges[
-                                          "Academic Catalogue"
-                                        ][0]
-                                      )}
-                                      <Show
-                                        when={
-                                          JSON.parse(
-                                            localStorage.getItem("jetsUser")
-                                          ).surname === "ict" ||
-                                          JSON.parse(
-                                            localStorage.getItem("jetsUser")
-                                          ).surname === "bursar"
-                                        }
-                                      >
-                                        &nbsp;[
-                                        <span
-                                          onClick={() => {
-                                            editSingleCharge(
-                                              "Academic Catalogue"
-                                            );
-                                          }}
-                                          class="text-red-600 font-bold hover:opacity-60 cursor-pointer"
-                                        >
-                                          Edit
-                                        </span>
-                                        ]
-                                      </Show>
-                                    </Show>
-                                  </td>
-                                </tr>
-                                <tr class="border-b border-black">
-                                  <td class="p-4 border-r border-black font-semibold">
-                                    13.
-                                  </td>
-                                  <td class="p-4 border-r border-black">
-                                    Late Registration
-                                  </td>
-                                  <td class="p-4">
-                                    <Show
-                                      when={
-                                        registrationData().adminCharges[
-                                          "Late Registration"
-                                        ]
-                                      }
-                                    >
-                                      {formatter.format(
-                                        registrationData().adminCharges[
-                                          "Late Registration"
-                                        ][0]
-                                      )}
-                                      <Show
-                                        when={
-                                          JSON.parse(
-                                            localStorage.getItem("jetsUser")
-                                          ).surname === "ict" ||
-                                          JSON.parse(
-                                            localStorage.getItem("jetsUser")
-                                          ).surname === "bursar"
-                                        }
-                                      >
-                                        &nbsp;[
-                                        <span
-                                          onClick={() => {
-                                            editSingleCharge("Late Registration");
-                                          }}
-                                          class="text-red-600 font-bold hover:opacity-60 cursor-pointer"
-                                        >
-                                          Edit
-                                        </span>
-                                        ]
-                                      </Show>
-                                    </Show>
-                                  </td>
-                                </tr>
-                                <tr class="border-b border-black">
-                                  <td class="p-4 border-r border-black font-semibold">
-                                    14.
-                                  </td>
-                                  <td class="p-4 border-r border-black">
-                                    ACTEA Accreditation/Services
-                                  </td>
-                                  <td class="p-4">
-                                    <Show
-                                      when={
-                                        registrationData().adminCharges[
-                                          "ACTEA Accreditation/Services"
-                                        ]
-                                      }
-                                    >
-                                      {formatter.format(
-                                        registrationData().adminCharges[
-                                          "ACTEA Accreditation/Services"
-                                        ][0]
-                                      )}
-                                      <Show
-                                        when={
-                                          JSON.parse(
-                                            localStorage.getItem("jetsUser")
-                                          ).surname === "ict" ||
-                                          JSON.parse(
-                                            localStorage.getItem("jetsUser")
-                                          ).surname === "bursar"
-                                        }
-                                      >
-                                        &nbsp;[
-                                        <span
-                                          onClick={() => {
-                                            editSingleCharge(
-                                              "ACTEA Accreditation/Services"
-                                            );
-                                          }}
-                                          class="text-red-600 font-bold hover:opacity-60 cursor-pointer"
-                                        >
-                                          Edit
-                                        </span>
-                                        ]
-                                      </Show>
-                                    </Show>
-                                  </td>
-                                </tr>
-                                <tr class="border-b border-black">
-                                  <td
-                                    class="p-4 border-r border-black font-semibold"
-                                    colSpan={2}
-                                  >
-                                    Sub Total
-                                  </td>
-                                  <td class="p-4 font-semibold">
-                                    <Show
-                                      when={
-                                        registrationData().adminCharges["total"]
-                                      }
-                                    >
-                                      {pickedCourses.length < 2
-                                        ? formatter.format(
-                                            parseInt(
-                                              registrationData().adminCharges[
-                                                "total"
-                                              ][0]
-                                            ) - parseInt(0)
-                                          )
-                                        : // + " (For less than 2 Courses)"
-                                          formatter.format(
-                                            parseInt(
-                                              registrationData().adminCharges[
-                                                "total"
-                                              ][0]
-                                            )
-                                          )}
-                                    </Show>
-                                  </td>
-                                </tr>
-                              </Show>
+                              )}
+                            </For>
+                            
+                            {/* Sub Total Row */}
+                            <tr class="border-b border-black">
+                              <td class="p-4 border-r border-black font-semibold" colSpan={2}>
+                                Sub Total
+                              </td>
+                              <td class="p-4 font-semibold">
+                                <Show when={registrationData().adminCharges["total"]}>
+                                  {pickedCourses.length < 2
+                                    ? formatter.format(parseInt(registrationData().adminCharges["total"][0]) - parseInt(0))
+                                    : formatter.format(parseInt(registrationData().adminCharges["total"][0]))}
+                                </Show>
+                              </td>
+                            </tr>
+                          </Show>
                             </tbody>
 
                             <tbody>
