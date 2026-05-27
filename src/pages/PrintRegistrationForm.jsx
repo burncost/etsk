@@ -469,590 +469,427 @@ export default function PrintRegistrationForm() {
   const [registrationData] = createResource(registrationFormData);
 
   return (
-    <MetaProvider>
-      <Title>
-        Print Registration Form - ECWA Theological Seminary, KAGORO (ETSK)
-      </Title>
-      <Meta
-        name="description"
-        content="Print Registration Form on ECWA Theological Seminary, KAGORO (ETSK)"
-      />
-      <>
-        <Show
-          when={registrationData.loading}
-          fallback={
-            <>
-              <div
-                onClick={() => printNow()}
-                class="no-print bg-purple-900 text-white text-lg text-center py-4 cursor-pointer hover:opacity-60"
-              >
-                Click here to Print
-              </div>
-              <div class="px-8 w-full text-xs space-y-4">
-                <h2 class="flex text-center pb-2 border-b border-red-200">
-                  <div class="w-14">
-                    <img src="/small-logo.png" class="w-full" />
-                  </div>
-                  <div class="grow text-center font-semibold pt-2">
-                    <h1 class="text-xl">
-                      ECWA Theological Seminary, KAGORO (ETSK)
-                    </h1>
-                    <p>
-                      <Show
-                        when={
-                          registrationData().studentReg.current_level === "5" ||
-                          registrationData().studentReg.current_level === "6" ||
-                          registrationData().studentReg.current_level === "7"
-                        }
-                        fallback={<>Undergraduate</>}
-                      >
-                        Postgraduate
-                      </Show>{" "}
-                      Student Online Enrollment
-                    </p>
-                  </div>
-                  <div class="pt-3 italics">
-                    <b>Form No.: </b>
-                    <br />
-                    <Show when={formNumber()}>R{formNumber()}</Show>
-                  </div>
-                </h2>
-                <div class="space-y-6">
-                  <div class="overflow-x-auto">
-                    <table cellPadding={0} cellSpacing={0} class="w-full">
-                      <thead>
-                        <tr class="bg-white border-b border-black text-blue-900">
-                          <th class="p-1 text-left uppercase" colSpan={5}>
-                            :: Personal Data
-                          </th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr class="border-b border-black">
-                          <td class="p-1">
-                            <b>Year of Admission:</b>&nbsp;
-                            <span>
-                              {registrationData().student.year_of_admission}
-                            </span>
-                          </td>
+      <MetaProvider>
+        <Title>Print Registration Form - ECWA Theological Seminary, KAGORO (ETSK)</Title>
+        <Meta
+          name="description"
+          content="Print Registration Form on ECWA Theological Seminary, KAGORO (ETSK)"
+        />
+        <>
+          <Show
+            when={registrationData.loading}
+            fallback={
+              <>
+                {/* Print Action Bar - Hidden on Print */}
+                <div
+                  onClick={() => printNow()}
+                  class="no-print bg-gradient-to-r from-purple-900 to-purple-700 text-white text-lg text-center py-4 cursor-pointer hover:opacity-90 transition-opacity shadow-md"
+                >
+                  🖨️ Click Here to Print Registration Form
+                </div>
 
-                          <td class="p-1">
-                            <b>Today's Date:</b>&nbsp;
-                            <span>
-                              {new Date().getDate()}-{new Date().getMonth() + 1}
-                              -{new Date().getFullYear()}
-                            </span>
-                          </td>
-                          <td class="p-1">
-                            <b>Academic Session:</b>&nbsp;
-                            <span>{registrationData().period.session}</span>
-                          </td>
-                          <td class="p-1">
-                            <b>Semester(s):</b>&nbsp;
-                            <span class="uppercase">
-                              {registrationData().period.semester}
-                            </span>
-                          </td>
-                          <td class="p-1" rowSpan={4}>
-                            <div class="w-40 max-h-40 overflow-hidden rounded-md">
-                              <img
-                                src={getOptPassport(
-                                  registrationData().user.passport_url
-                                )}
-                                class="w-full"
-                              />
-                            </div>
-                          </td>
-                        </tr>
-                        <tr class="border-b border-black">
-                          <td class="p-1">
-                            <b>Name:</b>&nbsp;
-                            <b class="uppercase">
+                {/* Main Form Container - Academic Style */}
+                <div class="bg-white text-gray-800 font-serif max-w-5xl mx-auto my-6 shadow-lg print:shadow-none print:m-0">
+                  
+                  {/* Institutional Header */}
+                  <header class="border-b-4 border-purple-900 bg-gradient-to-r from-purple-50 to-amber-50 px-8 py-6">
+                    <div class="flex items-center justify-between">
+                      {/* Logo Section */}
+                      <div class="w-20">
+                        <img src="/small-logo.png" class="w-full h-auto" alt="ETSK Logo" />
+                      </div>
+                      
+                      {/* Institution Title */}
+                      <div class="text-center flex-1 px-4">
+                        <h1 class="text-2xl font-bold text-purple-900 uppercase tracking-wide">
+                          ECWA Theological Seminary, KAGORO (ETSK)
+                        </h1>
+                        <p class="text-lg text-gray-700 mt-1">
+                          <Show
+                            when={
+                              registrationData().studentReg.current_level === "5" ||
+                              registrationData().studentReg.current_level === "6" ||
+                              registrationData().studentReg.current_level === "7"
+                            }
+                            fallback={<span class="text-purple-700 font-medium">Undergraduate</span>}
+                          >
+                            <span class="text-amber-700 font-medium">Postgraduate</span>
+                          </Show>{" "}
+                          <span class="text-gray-600">Student Online Enrollment</span>
+                        </p>
+                      </div>
+                      
+                      {/* Form Number */}
+                      <div class="text-right">
+                        <div class="bg-purple-900 text-amber-100 px-4 py-2 rounded-lg shadow-sm">
+                          <span class="text-xs uppercase tracking-wider">Form No.</span>
+                          <Show when={formNumber()}>
+                            <div class="text-xl font-bold font-mono">R{formNumber()}</div>
+                          </Show>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    {/* Session Info Bar */}
+                    <div class="mt-4 pt-4 border-t border-purple-200 flex flex-wrap gap-4 text-sm">
+                      <div><span class="font-semibold text-purple-800">Admission Year:</span> {registrationData().student.year_of_admission}</div>
+                      <div><span class="font-semibold text-purple-800">Date:</span> {new Date().getDate()}-{new Date().getMonth() + 1}-{new Date().getFullYear()}</div>
+                      <div><span class="font-semibold text-purple-800">Session:</span> {registrationData().period.session}</div>
+                      <div><span class="font-semibold text-purple-800">Semester:</span> <span class="uppercase">{registrationData().period.semester}</span></div>
+                    </div>
+                  </header>
+
+                  {/* Content Body */}
+                  <div class="px-8 py-6 space-y-8">
+                    
+                    {/* ===== PERSONAL DATA SECTION ===== */}
+                    <section class="border-2 border-purple-100 rounded-xl overflow-hidden">
+                      <div class="bg-purple-900 text-amber-100 px-5 py-3 flex items-center justify-between">
+                        <h2 class="font-bold text-lg tracking-wide">:: Personal Data</h2>
+                        {/* Passport Photo */}
+                        <div class="w-24 h-24 border-2 border-amber-300 rounded-lg overflow-hidden bg-white shadow-inner">
+                          <img
+                            src={getOptPassport(registrationData().user.passport_url)}
+                            class="w-full h-full object-cover"
+                            alt="Student Passport"
+                          />
+                        </div>
+                      </div>
+                      
+                      <div class="p-5 bg-white">
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-x-6 gap-y-4 text-sm">
+                          <div>
+                            <span class="text-gray-500 block text-xs uppercase tracking-wide">Full Name</span>
+                            <span class="font-semibold text-purple-900 uppercase">
                               {registrationData().user.surname}
-                            </b>{" "}
-                            <span>{registrationData().user.first_name}</span>{" "}
-                            <span>{registrationData().user.other_names}</span>
-                          </td>
-                          <td class="p-1">
-                            <b>Gender:</b>&nbsp;
-                            <span class="uppercase">
-                              {registrationData().user.gender}
-                            </span>
-                          </td>
-                          <td class="p-1">
-                            <b>Phone Number:</b>&nbsp;
+                            </span>{" "}
+                            <span>{registrationData().user.first_name} {registrationData().user.other_names}</span>
+                          </div>
+                          <div>
+                            <span class="text-gray-500 block text-xs uppercase tracking-wide">Gender</span>
+                            <span class="font-medium uppercase">{registrationData().user.gender}</span>
+                          </div>
+                          <div>
+                            <span class="text-gray-500 block text-xs uppercase tracking-wide">Phone</span>
                             <span>{registrationData().user.phone_number}</span>
-                          </td>
-                          <td class="p-1">
-                            <b>Email:</b>&nbsp;
-                            <span>{registrationData().student.email}</span>
-                          </td>
-                        </tr>
-                        <tr class="border-b border-black">
-                          <td class="p-1">
-                            <b>Ledger No.:</b>&nbsp;
-                            {registrationData().student.ledger_number}
-                          </td>
-                          <td class="p-1">
-                            <b>Mat. No.:</b>&nbsp;
-                            <span class="uppercase">
-                              {registrationData().student.matriculation_number}
-                            </span>
-                          </td>
-                          <td class="p-1">
-                            <b>Special St. Cat:</b>&nbsp;
-                            <span class="capitalize">
-                              {
-                                registrationData().student
-                                  .special_student_category
-                              }
-                            </span>
-                          </td>
-                          <td class="p-1">
-                            <b>Denomination:</b>&nbsp;
-                            <span>
-                              {registrationData().student.denomination}
-                            </span>
-                          </td>
-                        </tr>
-                        <tr class="border-b border-black">
-                          <td class="p-1">
-                            <b>Programme:</b>&nbsp;
-                            {registrationData().student.programme}
-                          </td>
-                          <td class="p-1">
-                            <b>Mode of Study:</b>&nbsp;
-                            {modeOfStudy()}
-                          </td>
-                          <td class="p-1">
-                            <b>Affiliation Status:</b>&nbsp;
-                            <span class="uppercase">
-                              {registrationData().student.affiliation_status}
-                            </span>
-                          </td>
-                          <td class="p-1">
-                            <b>Current Level:</b>&nbsp;
+                          </div>
+                          <div>
+                            <span class="text-gray-500 block text-xs uppercase tracking-wide">Email</span>
+                            <span class="break-all">{registrationData().student.email}</span>
+                          </div>
+                          <div>
+                            <span class="text-gray-500 block text-xs uppercase tracking-wide">Ledger No.</span>
+                            <span class="font-mono font-medium">{registrationData().student.ledger_number}</span>
+                          </div>
+                          <div>
+                            <span class="text-gray-500 block text-xs uppercase tracking-wide">Matric No.</span>
+                            <span class="font-mono font-medium uppercase">{registrationData().student.matriculation_number}</span>
+                          </div>
+                          <div>
+                            <span class="text-gray-500 block text-xs uppercase tracking-wide">Special Category</span>
+                            <span class="capitalize">{registrationData().student.special_student_category}</span>
+                          </div>
+                          <div>
+                            <span class="text-gray-500 block text-xs uppercase tracking-wide">Denomination</span>
+                            <span>{registrationData().student.denomination}</span>
+                          </div>
+                          <div>
+                            <span class="text-gray-500 block text-xs uppercase tracking-wide">Programme</span>
+                            <span class="font-medium">{registrationData().student.programme}</span>
+                          </div>
+                          <div>
+                            <span class="text-gray-500 block text-xs uppercase tracking-wide">Mode of Study</span>
+                            <span class="font-medium">{modeOfStudy()}</span>
+                          </div>
+                          <div>
+                            <span class="text-gray-500 block text-xs uppercase tracking-wide">Affiliation</span>
+                            <span class="uppercase font-medium">{registrationData().student.affiliation_status}</span>
+                          </div>
+                          <div>
+                            <span class="text-gray-500 block text-xs uppercase tracking-wide">Current Level</span>
                             <span>
                               {registrationData().studentReg.current_level}
-                              &nbsp;
-                              <span class="uppercase">
-                                ({registrationData().studentReg.fresh_returning}{" "}
-                                Student)
+                              <span class="text-gray-500 ml-1">
+                                ({registrationData().studentReg.fresh_returning} Student)
                               </span>
                             </span>
-                          </td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
-                  <div class="overflow-x-auto">
-                    <table cellPadding={0} cellSpacing={0} class="w-full">
-                      <thead>
-                        <tr class="bg-white border-b border-black text-blue-900">
-                          <th class="p-1 text-left uppercase" colSpan={3}>
-                            :: Seminary Charges
-                          </th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr class="bg-gray-400 border-b border-black font-semibold">
-                          <td class="p-1 border-r border-black">Sn.</td>
-                          <td class="p-1 border-r border-black">Item</td>
-                          <td class="p-1">Amount</td>
-                        </tr>
-                        {/*populate in person admin/seminary charges */}
-                        <Show when={(modeOfStudy() !== "Virtual")}>
-                          <For each={[
-                            "Compound Improvement",
-                            "Student Council/Departmental Fees",
-                            "Educators Levy",
-                            "ID card",
-                            "Medical Deposit",
-                            "Matriculation Fee",
-                            "Sport fee",
-                            "Library Charges",
-                            "Administrative Charges",
-                            "Cafe Fee",
-                            "Utility",
-                            "ACTEA Accreditation/Services",
-                            "Seminary Book",
-                          ]}>
-                            {(chargeName, i) => (
-                              <tr class="border-b border-black">
-                                <td class="p-4 border-r border-black font-semibold">
-                                  {i() + 1}.
-                                </td>
-                                <td class="p-4 border-r border-black">
-                                  {chargeName}
-                                </td>
-                                <td class="p-4">
-                                  <Show when={registrationData().adminCharges[chargeName]}>
-                                    {formatter.format(registrationData().adminCharges[chargeName][0])}
-                                    <Show
-                                      when={
-                                        JSON.parse(localStorage.getItem("jetsUser")).surname === "ict" ||
-                                        JSON.parse(localStorage.getItem("jetsUser")).surname === "bursar"
-                                      }
-                                    >
-                                      &nbsp;[
-                                      <span
-                                        onClick={() => editSingleCharge(chargeName)}
-                                        class="text-red-600 font-bold hover:opacity-60 cursor-pointer"
-                                      >
-                                        Edit
-                                      </span>
-                                      ]
-                                    </Show>
-                                  </Show>
-                                </td>
-                              </tr>
-                            )}
-                          </For>
-                          
-                          {/* Sub Total Row */}
-                          <tr class="border-b border-black">
-                            <td class="p-4 border-r border-black font-semibold" colSpan={2}>
-                              Sub Total
-                            </td>
-                            <td class="p-4 font-semibold">
-                              <Show when={registrationData().adminCharges["total"]}>
-                                {pickedCourses.length < 2
-                                  ? formatter.format(parseInt(registrationData().adminCharges["total"][0]) - parseInt(0))
-                                  : formatter.format(parseInt(registrationData().adminCharges["total"][0]))}
-                              </Show>
-                            </td>
-                          </tr>
-                        </Show>
+                          </div>
+                        </div>
+                      </div>
+                    </section>
 
-                        {/*populate admin/seminary charges */}
-                        <Show when={(modeOfStudy()==="Virtual")}>
-                          <For each={[
-                            "Departmental Charges",
-                            "ECWA Education Dept Levy", 
-                            "Development for Online Capacity",
-                            "Internet and Portal Access"
-                          ]}>
-                            {(chargeName, i) => (
-                              <tr class="border-b border-black">
-                                <td class="p-4 border-r border-black font-semibold">
-                                  {i() + 1}.
-                                </td>
-                                <td class="p-4 border-r border-black">
-                                  {chargeName}
-                                </td>
-                                <td class="p-4">
-                                  <Show when={registrationData().adminCharges[chargeName]}>
-                                    {formatter.format(registrationData().adminCharges[chargeName][0])}
-                                    <Show
-                                      when={
-                                        JSON.parse(localStorage.getItem("jetsUser")).surname === "ict" ||
-                                        JSON.parse(localStorage.getItem("jetsUser")).surname === "bursar"
-                                      }
-                                    >
-                                      &nbsp;[
-                                      <span
-                                        onClick={() => editSingleCharge(chargeName)}
-                                        class="text-red-600 font-bold hover:opacity-60 cursor-pointer"
-                                      >
-                                        Edit
-                                      </span>
-                                      ]
-                                    </Show>
-                                  </Show>
-                                </td>
-                              </tr>
-                            )}
-                          </For>
-                          
-                          {/* Sub Total Row */}
-                          <tr class="border-b border-black">
-                            <td class="p-4 border-r border-black font-semibold" colSpan={2}>
-                              Sub Total
-                            </td>
-                            <td class="p-4 font-semibold">
-                              <Show when={registrationData().adminCharges["total"]}>
-                                {pickedCourses.length < 2
-                                  ? formatter.format(parseInt(registrationData().adminCharges["total"][0]) - parseInt(0))
-                                  : formatter.format(parseInt(registrationData().adminCharges["total"][0]))}
-                              </Show>
-                            </td>
-                          </tr>
-                        </Show>
-
-                        {/* Spacer row - just a regular <tr>, no nested tbody */}
-                        <tr>
-                          <td colSpan={3} class="h-6"></td>
-                        </tr>
-
-                        {/* Affiliation Fee section - just <tr> elements, no nested thead */}
-                        <Show when={registrationData().student.affiliation_status === "yes" && period.semester==="1st"}>
-                          <tr class="bg-white border-b border-black text-blue-900">                                  
-                            <th class="p-1 text-left uppercase" colSpan={3}>
-                              :: AFFILIATION FEE
-                            </th>                                  
-                          </tr>
-                          <tr class="border-b border-black">
-                            <td class="p-4 border-r border-black font-semibold" colSpan={2}>
-                              Sub Total
-                            </td>
-                            <td class="p-4 font-semibold">
-                              {formatter.format("40000")}
-                            </td>
-                          </tr>
-                        </Show>
-                      </tbody>
-                    </table> 
-                  </div>
-                  <div class="overflow-x-auto">
-                    <table cellPadding={0} cellSpacing={0} class="w-full">
-                      <thead>
-                        <tr class="bg-white border-b border-black text-blue-900">
-                          <th class="p-1 text-left uppercase" colSpan={6}>
-                            :: PROGRAMME ({registrationData().student.programme}
-                            )
-                          </th>
-                        </tr>
-                        <tr class="border-b border-black bg-gray-300">
-                          <th class="p-1 text-left border-r border-black">
-                            Sn.
-                          </th>
-                          <th class="p-1 text-left border-r border-black">
-                            Title
-                          </th>
-                          <th class="p-1 text-left border-r border-black">
-                            Code
-                          </th>
-                          <th class="p-1 text-left border-r border-black">
-                            CH
-                          </th>
-                          <th class="p-1 text-left border-r border-black">
-                            Unit Cost
-                          </th>
-                          <th class="p-1 text-left">Amount</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <Show when={pickedCourses}>
-                          <For each={pickedCourses}>
-                            {(course, i) => (
-                              <tr class="border-b border-black">
-                                <td class="p-1 border-r border-black font-semibold">
-                                  {i() + 1}.
-                                </td>
-                                <td class="p-1 border-r border-black">
-                                  <Show
-                                    when={detPickedCourses[course]}
-                                    fallback={<>Fetching.. .</>}
-                                  >
-                                    {detPickedCourses[course][0]}
-                                  </Show>
-                                </td>
-                                <td class="p-1 border-r border-black">
-                                  <Show
-                                    when={course}
-                                    fallback={<>Fetching.. .</>}
-                                  >
-                                    {course}
-                                  </Show>
-                                </td>
-                                <td class="p-1 border-r border-black">
-                                  <Show
-                                    when={detPickedCourses[course]}
-                                    fallback={<>Fetching.. .</>}
-                                  >
-                                    {detPickedCourses[course][1]}
-                                  </Show>
-                                </td>
-                                <td class="p-1 border-r border-black">
-                                  <Show
-                                    when={detPickedCourses[course]}
-                                    fallback={<>Fetching.. .</>}
-                                  >
-                                    {formatter.format(
-                                      detPickedCourses[course][2]
-                                    )}
-                                  </Show>
-                                </td>
-                                <td class="p-1">
-                                  <Show
-                                    when={detPickedCourses[course]}
-                                    fallback={<>Fetching.. .</>}
-                                  >
-                                    {formatter.format(
-                                      detPickedCourses[course][3]
-                                    )}
-                                  </Show>
-                                </td>
-                              </tr>
-                            )}
-                          </For>
-                          <tr class="border-b border-black">
-                            <td
-                              class="font-semibold p-1 border-r border-black"
-                              colSpan={3}
-                            >
-                              Sub Total{" "}
-                              <Show
-                                when={
-                                  registrationData().student
-                                    .special_student_category === "jets staff"
-                                }
-                              >
-                                (ETSK Staff)
-                              </Show>
-                            </td>
-                            <td class="font-semibold p-1 border-r border-black">
-                              {totalCU()}
-                            </td>
-                            <td class="p-1 border-r border-black">&nbsp;</td>
-                            <td class="font-semibold p-1">
-                              <Show
-                                when={
-                                  registrationData().student
-                                    .special_student_category === "jets staff"
-                                }
-                              >
-                                <>
-                                  <span class="line-through">
-                                    {formatter.format(
-                                      parseInt(totalProgFee()) * 2
-                                    )}
-                                  </span>
-                                  <br />
-                                </>
-                              </Show>
-                              {formatter.format(parseInt(totalProgFee()))}
-                            </td>
-                          </tr>
-                        </Show>
-                      </tbody>
-                    </table>
-                  </div>
-                  <div class="overflow-x-auto">
-                    <table cellPadding={0} cellSpacing={0} class="w-full">
-                      <thead>
-                        <tr class="bg-white border-b border-black text-blue-900">
-                          <th class="p-1 text-left uppercase">
-                            :: SUMMARY OF FEES
-                          </th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr class="border-b border-black">
-                          <td class="p-1 grid grid-cols-3 gap-4">
-                            <span>
-                              Portal Wallet Before Registration:
-                              <br />
-                              <b>
-                                {formatter.format(
-                                  registrationData().openingBal()
-                                )}
-                              </b>
-                            </span>
-                            <span>
-                              Seminary Charges:
-                              <br />
-                              <b>
-                                <Show
-                                  when={pickedCourses.length < 2}
-                                  fallback={
-                                    <Show
-                                      when={
-                                        registrationData().adminCharges["total"]
-                                      }
-                                      fallback={
+                    {/* ===== SEMINARY CHARGES SECTION ===== */}
+                    <section class="border-2 border-purple-100 rounded-xl overflow-hidden">
+                      <div class="bg-purple-900 text-amber-100 px-5 py-3">
+                        <h2 class="font-bold text-lg tracking-wide">:: Seminary Charges</h2>
+                      </div>
+                      
+                      <div class="p-5 bg-white">
+                        <table class="w-full text-sm">
+                          <thead>
+                            <tr class="border-b-2 border-purple-200">
+                              <th class="text-left py-2 px-3 w-12 text-gray-500 font-medium">Sn.</th>
+                              <th class="text-left py-2 px-3 text-gray-500 font-medium">Item</th>
+                              <th class="text-right py-2 px-3 text-gray-500 font-medium">Amount (₦)</th>
+                            </tr>
+                          </thead>
+                          <tbody class="divide-y divide-purple-50">
+                            {/* In-Person Charges */}
+                            <Show when={modeOfStudy() !== "Virtual"}>
+                              <For each={[
+                                "Compound Improvement", "Student Council/Departmental Fees", "Educators Levy",
+                                "ID card", "Medical Deposit", "Matriculation Fee", "Sport fee",
+                                "Library Charges", "Administrative Charges", "Cafe Fee", "Utility",
+                                "ACTEA Accreditation/Services", "Seminary Book",
+                              ]}>
+                                {(chargeName, i) => (
+                                  <tr class="hover:bg-purple-50 transition-colors">
+                                    <td class="py-2 px-3 font-medium text-purple-800">{i() + 1}.</td>
+                                    <td class="py-2 px-3">{chargeName}</td>
+                                    <td class="py-2 px-3 text-right font-mono">
+                                      <Show when={registrationData().adminCharges[chargeName]}>
+                                        {formatter.format(registrationData().adminCharges[chargeName][0])}
                                         <Show
-                                          when={getTotalAdmin()}
-                                          fallback={0}
+                                          when={
+                                            JSON.parse(localStorage.getItem("jetsUser")).surname === "ict" ||
+                                            JSON.parse(localStorage.getItem("jetsUser")).surname === "bursar"
+                                          }
                                         >
-                                          {formatter.format(getTotalAdmin())}
+                                          <span class="ml-2 text-amber-600 font-bold cursor-pointer hover:text-amber-800"
+                                            onClick={() => editSingleCharge(chargeName)}>
+                                            [Edit]
+                                          </span>
                                         </Show>
-                                      }
-                                    >
-                                      {formatter.format(
-                                        registrationData().adminCharges[
-                                          "total"
-                                        ][0]
-                                      )}
-                                    </Show>
-                                  }
-                                >
-                                  <Show
-                                    when={
-                                      registrationData().adminCharges["total"]
-                                    }
-                                    fallback={
-                                      <Show when={getTotalAdmin()} fallback={0}>
-                                        {formatter.format(getTotalAdmin())}
                                       </Show>
-                                    }
-                                  >
-                                    {formatter.format(
-                                      registrationData().adminCharges[
-                                        "total"
-                                      ][0] - parseInt(0)
-                                    )}
+                                    </td>
+                                  </tr>
+                                )}
+                              </For>
+                            </Show>
+
+                            {/* Virtual Charges */}
+                            <Show when={modeOfStudy() === "Virtual"}>
+                              <For each={[
+                                "Departmental Charges", "ECWA Education Dept Levy",
+                                "Development for Online Capacity", "Internet and Portal Access"
+                              ]}>
+                                {(chargeName, i) => (
+                                  <tr class="hover:bg-purple-50 transition-colors">
+                                    <td class="py-2 px-3 font-medium text-purple-800">{i() + 1}.</td>
+                                    <td class="py-2 px-3">{chargeName}</td>
+                                    <td class="py-2 px-3 text-right font-mono">
+                                      <Show when={registrationData().adminCharges[chargeName]}>
+                                        {formatter.format(registrationData().adminCharges[chargeName][0])}
+                                        <Show
+                                          when={
+                                            JSON.parse(localStorage.getItem("jetsUser")).surname === "ict" ||
+                                            JSON.parse(localStorage.getItem("jetsUser")).surname === "bursar"
+                                          }
+                                        >
+                                          <span class="ml-2 text-amber-600 font-bold cursor-pointer hover:text-amber-800"
+                                            onClick={() => editSingleCharge(chargeName)}>
+                                            [Edit]
+                                          </span>
+                                        </Show>
+                                      </Show>
+                                    </td>
+                                  </tr>
+                                )}
+                              </For>
+                            </Show>
+
+                            {/* Sub Total */}
+                            <tr class="bg-gradient-to-r from-purple-50 to-amber-50 font-semibold border-t-2 border-purple-200">
+                              <td class="py-3 px-3" colSpan={2}>Sub Total</td>
+                              <td class="py-3 px-3 text-right font-mono text-purple-900">
+                                <Show when={registrationData().adminCharges["total"]}>
+                                  {formatter.format(
+                                    pickedCourses.length < 2
+                                      ? parseInt(registrationData().adminCharges["total"][0])
+                                      : parseInt(registrationData().adminCharges["total"][0])
+                                  )}
+                                </Show>
+                              </td>
+                            </tr>
+
+                            {/* Affiliation Fee */}
+                            <Show when={registrationData().student.affiliation_status === "yes" && period.semester==="1st"}>
+                              <tr class="border-t-4 border-amber-400 mt-4">
+                                <td colSpan={3} class="py-3 px-3">
+                                  <span class="font-bold text-amber-800 uppercase tracking-wide">:: Affiliation Fee</span>
+                                </td>
+                              </tr>
+                              <tr class="bg-amber-50 font-semibold">
+                                <td class="py-3 px-3" colSpan={2}>Affiliation Fee (First Semester)</td>
+                                <td class="py-3 px-3 text-right font-mono text-amber-800">
+                                  {formatter.format("40000")}
+                                </td>
+                              </tr>
+                            </Show>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+
+                    {/* ===== PROGRAMME / COURSES SECTION ===== */}
+                    <section class="border-2 border-purple-100 rounded-xl overflow-hidden">
+                      <div class="bg-purple-900 text-amber-100 px-5 py-3">
+                        <h2 class="font-bold text-lg tracking-wide">
+                          :: Programme ({registrationData().student.programme})
+                        </h2>
+                      </div>
+                      
+                      <div class="p-5 bg-white overflow-x-auto">
+                        <table class="w-full text-sm min-w-[600px]">
+                          <thead>
+                            <tr class="border-b-2 border-purple-200 bg-purple-50">
+                              <th class="text-left py-2 px-3 w-10 text-gray-600 font-medium">Sn.</th>
+                              <th class="text-left py-2 px-3 text-gray-600 font-medium">Course Title</th>
+                              <th class="text-left py-2 px-3 text-gray-600 font-medium">Code</th>
+                              <th class="text-center py-2 px-3 text-gray-600 font-medium w-16">CH</th>
+                              <th class="text-right py-2 px-3 text-gray-600 font-medium">Unit Cost</th>
+                              <th class="text-right py-2 px-3 text-gray-600 font-medium">Amount</th>
+                            </tr>
+                          </thead>
+                          <tbody class="divide-y divide-purple-50">
+                            <Show when={pickedCourses}>
+                              <For each={pickedCourses}>
+                                {(course, i) => (
+                                  <tr class="hover:bg-purple-50 transition-colors">
+                                    <td class="py-2 px-3 font-medium text-purple-800">{i() + 1}.</td>
+                                    <td class="py-2 px-3">
+                                      <Show when={detPickedCourses[course]} fallback={<span class="text-gray-400 italic">Loading...</span>}>
+                                        {detPickedCourses[course][0]}
+                                      </Show>
+                                    </td>
+                                    <td class="py-2 px-3 font-mono font-medium text-purple-700">
+                                      <Show when={course} fallback={<span class="text-gray-400 italic">Loading...</span>}>
+                                        {course}
+                                      </Show>
+                                    </td>
+                                    <td class="py-2 px-3 text-center font-medium">
+                                      <Show when={detPickedCourses[course]} fallback={<span class="text-gray-400">–</span>}>
+                                        {detPickedCourses[course][1]}
+                                      </Show>
+                                    </td>
+                                    <td class="py-2 px-3 text-right font-mono">
+                                      <Show when={detPickedCourses[course]} fallback={<span class="text-gray-400">–</span>}>
+                                        {formatter.format(detPickedCourses[course][2])}
+                                      </Show>
+                                    </td>
+                                    <td class="py-2 px-3 text-right font-mono font-semibold text-purple-900">
+                                      <Show when={detPickedCourses[course]} fallback={<span class="text-gray-400">–</span>}>
+                                        {formatter.format(detPickedCourses[course][3])}
+                                      </Show>
+                                    </td>
+                                  </tr>
+                                )}
+                              </For>
+                              
+                              {/* Course Subtotal */}
+                              <tr class="bg-gradient-to-r from-purple-50 to-amber-50 font-semibold border-t-2 border-purple-200">
+                                <td class="py-3 px-3" colSpan={3}>
+                                  Sub Total
+                                  <Show when={registrationData().student.special_student_category === "jets staff"}>
+                                    <span class="ml-2 text-amber-700 text-xs">(ETSK Staff Discount Applied)</span>
+                                  </Show>
+                                </td>
+                                <td class="py-3 px-3 text-center font-medium">{totalCU()}</td>
+                                <td class="py-3 px-3"></td>
+                                <td class="py-3 px-3 text-right font-mono text-purple-900">
+                                  <Show when={registrationData().student.special_student_category === "jets staff"}>
+                                    <span class="line-through text-gray-400 text-xs block">
+                                      {formatter.format(parseInt(totalProgFee()) * 2)}
+                                    </span>
+                                  </Show>
+                                  {formatter.format(parseInt(totalProgFee()))}
+                                </td>
+                              </tr>
+                            </Show>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+
+                    {/* ===== SUMMARY OF FEES ===== */}
+                    <section class="border-2 border-purple-100 rounded-xl overflow-hidden bg-gradient-to-br from-purple-50 via-white to-amber-50">
+                      <div class="bg-purple-900 text-amber-100 px-5 py-3">
+                        <h2 class="font-bold text-lg tracking-wide">:: Summary of Fees</h2>
+                      </div>
+                      
+                      <div class="p-6">
+                        <div class="grid md:grid-cols-2 gap-6 text-sm">
+                          {/* Left Column */}
+                          <div class="space-y-4">
+                            <div class="flex justify-between items-center pb-3 border-b border-purple-100">
+                              <span class="text-gray-600">Portal Wallet (Before)</span>
+                              <span class="font-mono font-bold text-purple-900">
+                                {formatter.format(registrationData().openingBal())}
+                              </span>
+                            </div>
+                            <div class="flex justify-between items-center pb-3 border-b border-purple-100">
+                              <span class="text-gray-600">Seminary Charges</span>
+                              <span class="font-mono font-bold text-purple-900">
+                                <Show when={pickedCourses.length < 2} fallback={
+                                  <Show when={registrationData().adminCharges["total"]} fallback={
+                                    <Show when={getTotalAdmin()} fallback={0}>
+                                      {formatter.format(getTotalAdmin())}
+                                    </Show>
+                                  }>
+                                    {formatter.format(registrationData().adminCharges["total"][0])}
+                                  </Show>
+                                }>
+                                  <Show when={registrationData().adminCharges["total"]} fallback={
+                                    <Show when={getTotalAdmin()} fallback={0}>
+                                      {formatter.format(getTotalAdmin())}
+                                    </Show>
+                                  }>
+                                    {formatter.format(registrationData().adminCharges["total"][0])}
                                   </Show>
                                 </Show>
-                              </b>
-                            </span>
-                            <span>
-                              Programme Fees:
-                              <br />
-                              <b>
+                              </span>
+                            </div>
+                            <div class="flex justify-between items-center pb-3 border-b border-purple-100">
+                              <span class="text-gray-600">Programme Fees</span>
+                              <span class="font-mono font-bold text-purple-900">
                                 {formatter.format(parseInt(totalProgFee()))}
-                              </b>
-                            </span>
-                            <span>
-                              <Show when={registrationData().student.affiliation_status === "yes" && period.semester==="1st"}>
-                                Affiliaton Fee:
-                                <br/>
-                                <b>
-                                  {formatter.format(
-                                    parseInt(40000)
-                                  )}
-                                </b>
-                              </Show>
-                            </span>
-                            <span>
-                              Total Charges:
-                              <br />
-                              <b>
-                                <Show
-                                  when={pickedCourses.length < 2}
-                                  fallback={
-                                    <Show
-                                      when={registrationData().adminCharges["total"]}
-                                      fallback={
-                                        <span>
-                                          {formatter.format(
-                                            parseInt(getTotalAdmin()) +
-                                            parseInt(totalProgFee()) +
-                                            (registrationData().student.affiliation_status === "yes" && period.semester==="1st" ? 40000 : 0)
-                                          )}
-                                        </span>
-                                      }
-                                    >
-                                      {formatter.format(
-                                        parseInt(registrationData().adminCharges["total"][0]) +
-                                        parseInt(totalProgFee()) +
-                                        (registrationData().student.affiliation_status === "yes" && period.semester==="1st" ? 40000 : 0)
-                                      )}
-                                    </Show>
-                                  }
-                                >
-                                  <Show
-                                    when={registrationData().adminCharges["total"]}
-                                    fallback={
-                                      <span>
-                                        {formatter.format(
-                                          parseInt(getTotalAdmin()) +
-                                          parseInt(totalProgFee()) +
-                                          (registrationData().student.affiliation_status === "yes" && period.semester==="1st" ? 40000 : 0)
-                                        )}
-                                      </span>
-                                    }
-                                  >
+                              </span>
+                            </div>
+                            <Show when={registrationData().student.affiliation_status === "yes" && period.semester==="1st"}>
+                              <div class="flex justify-between items-center pb-3 border-b border-amber-200 bg-amber-50 px-3 -mx-3 rounded">
+                                <span class="text-amber-800 font-medium">Affiliation Fee</span>
+                                <span class="font-mono font-bold text-amber-800">
+                                  {formatter.format(40000)}
+                                </span>
+                              </div>
+                            </Show>
+                          </div>
+                          
+                          {/* Right Column - Totals */}
+                          <div class="space-y-4">
+                            <div class="bg-purple-900 text-amber-100 rounded-lg p-4 text-center">
+                              <span class="block text-xs uppercase tracking-wider opacity-90">Total Charges</span>
+                              <span class="block text-2xl font-bold font-mono mt-1">
+                                <Show when={pickedCourses.length < 2} fallback={
+                                  <Show when={registrationData().adminCharges["total"]} fallback={
+                                    <span>{formatter.format(
+                                      parseInt(getTotalAdmin()) + parseInt(totalProgFee()) +
+                                      (registrationData().student.affiliation_status === "yes" && period.semester==="1st" ? 40000 : 0)
+                                    )}</span>
+                                  }>
+                                    {formatter.format(
+                                      parseInt(registrationData().adminCharges["total"][0]) +
+                                      parseInt(totalProgFee()) +
+                                      (registrationData().student.affiliation_status === "yes" && period.semester==="1st" ? 40000 : 0)
+                                    )}
+                                  </Show>
+                                }>
+                                  <Show when={registrationData().adminCharges["total"]} fallback={
+                                    <span>{formatter.format(
+                                      parseInt(getTotalAdmin()) + parseInt(totalProgFee()) +
+                                      (registrationData().student.affiliation_status === "yes" && period.semester==="1st" ? 40000 : 0)
+                                    )}</span>
+                                  }>
                                     {formatter.format(
                                       parseInt(registrationData().adminCharges["total"][0]) +
                                       parseInt(totalProgFee()) +
@@ -1060,50 +897,35 @@ export default function PrintRegistrationForm() {
                                     )}
                                   </Show>
                                 </Show>
-                              </b>
-                            </span>
-                            <span>
-                              Portal Wallet After Registration:
-                              <br />
-                              <b>
-                              <Show
-                                  when={pickedCourses.length < 2}
-                                  fallback={
-                                    <Show
-                                      when={registrationData().adminCharges["total"]}
-                                      fallback={
-                                        <span>
-                                          {formatter.format(
-                                            parseInt(registrationData().openingBal()) -
-                                             (parseInt(getTotalAdmin()) +
-                                            parseInt(totalProgFee()) +
-                                            (registrationData().student.affiliation_status === "yes" ? 40000 : 0))
-                                          )}
-                                        </span>
-                                      }
-                                    >
-                                      {formatter.format(
-                                        parseInt(registrationData().openingBal()) - (
-                                        parseInt(registrationData().adminCharges["total"][0]) +
-                                        parseInt(totalProgFee()) +
-                                        (registrationData().student.affiliation_status === "yes" && period.semester==="1st"? 40000 : 0))
-                                      )}
-                                    </Show>
-                                  }
-                                >
-                                  <Show
-                                    when={registrationData().adminCharges["total"]}
-                                    fallback={
-                                      <span>
-                                        {formatter.format(
-                                          parseInt(registrationData().openingBal()) -
-                                          (parseInt(getTotalAdmin()) +
-                                          parseInt(totalProgFee()) +
-                                          (registrationData().student.affiliation_status === "yes" ? 40000 : 0))
-                                        )}
-                                      </span>
-                                    }
-                                  >
+                              </span>
+                            </div>
+                            
+                            <div class="flex justify-between items-center pb-2">
+                              <span class="text-gray-600 font-medium">Portal Wallet (After)</span>
+                              <span class="font-mono font-bold text-lg text-purple-900">
+                                <Show when={pickedCourses.length < 2} fallback={
+                                  <Show when={registrationData().adminCharges["total"]} fallback={
+                                    <span>{formatter.format(
+                                      parseInt(registrationData().openingBal()) -
+                                      (parseInt(getTotalAdmin()) + parseInt(totalProgFee()) +
+                                      (registrationData().student.affiliation_status === "yes" ? 40000 : 0))
+                                    )}</span>
+                                  }>
+                                    {formatter.format(
+                                      parseInt(registrationData().openingBal()) -
+                                      (parseInt(registrationData().adminCharges["total"][0]) +
+                                      parseInt(totalProgFee()) +
+                                      (registrationData().student.affiliation_status === "yes" && period.semester==="1st" ? 40000 : 0))
+                                    )}
+                                  </Show>
+                                }>
+                                  <Show when={registrationData().adminCharges["total"]} fallback={
+                                    <span>{formatter.format(
+                                      parseInt(registrationData().openingBal()) -
+                                      (parseInt(getTotalAdmin()) + parseInt(totalProgFee()) +
+                                      (registrationData().student.affiliation_status === "yes" ? 40000 : 0))
+                                    )}</span>
+                                  }>
                                     {formatter.format(
                                       parseInt(registrationData().openingBal()) -
                                       (parseInt(registrationData().adminCharges["total"][0]) +
@@ -1112,77 +934,74 @@ export default function PrintRegistrationForm() {
                                     )}
                                   </Show>
                                 </Show>
-                                {/* {formatter.format(
-                                  registrationData().closingBal()
-                                )}                               */}
-                              </b>
-                              
-                            </span>
-                          </td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
-                  <div class="overflow-x-auto">
-                    <table cellPadding={0} cellSpacing={0} class="w-full">
-                      <thead>
-                        <tr class="bg-white border-b border-black text-blue-900">
-                          <th class="p-1 text-left uppercase">:: SIGNATURES</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr class="border-b border-black">
-                          <td class="p-1 pt-6 grid grid-cols-5 gap-4 text-center">
-                            <span class="col-span-4 grid gap-4 grid-cols-2">
-                              <div>
-                                [1] <b>Sign:</b> ........................{" "}
-                                <b>Date:</b> .....................
-                                <br />
-                                Head of Department
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </section>
+
+                    {/* ===== SIGNATURES & QR ===== */}
+                    <section class="border-2 border-purple-100 rounded-xl overflow-hidden">
+                      <div class="bg-purple-900 text-amber-100 px-5 py-3">
+                        <h2 class="font-bold text-lg tracking-wide">:: Authorizations</h2>
+                      </div>
+                      
+                      <div class="p-6 bg-white">
+                        <div class="grid md:grid-cols-5 gap-6 items-end">
+                          {/* Signature Blocks */}
+                          <div class="md:col-span-4 grid sm:grid-cols-2 gap-6">
+                            {[
+                              { label: "Head of Department", num: 1 },
+                              { label: "Dean of Faculty", num: 2 },
+                              { label: "Bursar", num: 3 },
+                              { label: "Registrar", num: 4 }
+                            ].map((sig) => (
+                              <div key={sig.num} class="text-center">
+                                <div class="border-b-2 border-dashed border-purple-300 h-16 mb-2"></div>
+                                <span class="block text-xs text-gray-500 mb-1">[{sig.num}] Signature & Date</span>
+                                <span class="block font-medium text-purple-900 text-sm">{sig.label}</span>
                               </div>
-                              <div>
-                                [2] <b>Sign:</b> ........................{" "}
-                                <b>Date:</b> ........................
-                                <br />
-                                Dean of Faculty
-                              </div>
-                              <div>
-                                [3] <b>Sign:</b> ........................{" "}
-                                <b>Date:</b> ........................
-                                <br />
-                                Bursar
-                              </div>
-                              <div>
-                                [4] <b>Sign:</b> ........................{" "}
-                                <b>Date:</b> ........................
-                                <br />
-                                Registrar
-                              </div>
-                            </span>
-                            <span class="1">
+                            ))}
+                          </div>
+                          
+                          {/* QR Code */}
+                          <div class="text-center">
+                            <div class="inline-block p-2 border-2 border-amber-300 rounded-lg bg-white shadow-sm">
                               <img
-                                class="mx-auto"
-                                src={
-                                  "https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=" +
-                                  registrationData().formNumber()
-                                }
+                                class="w-20 h-20"
+                                src={`https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=${registrationData().formNumber()}`}
+                                alt="Verification QR"
                               />
-                              {/* QRCode from: https://goqr.me/api/ */}
-                              <span class="text-xs text-right">QRETSK</span>
-                            </span>
-                          </td>
-                        </tr>
-                      </tbody>
-                    </table>
+                            </div>
+                            <span class="block text-xs text-gray-500 mt-2 font-mono">QRETSK</span>
+                            <Show when={formNumber()}>
+                              <span class="block text-xs text-purple-700 font-mono mt-1">Ref: R{formNumber()}</span>
+                            </Show>
+                          </div>
+                        </div>
+                        
+                        {/* Footer Note */}
+                        <div class="mt-8 pt-4 border-t border-purple-100 text-center text-xs text-gray-500">
+                          <p>This is an electronically generated document. No physical signature required for digital submission.</p>
+                          <p class="mt-1 font-medium text-purple-700">ECWA Theological Seminary, KAGORO • Est. 1964</p>
+                        </div>
+                      </div>
+                    </section>
+
                   </div>
+                  
+                  {/* Print Footer */}
+                  <footer class="no-print text-center py-4 text-xs text-gray-500 border-t border-purple-100 bg-purple-50">
+                    Generated on {new Date().toLocaleDateString()} • For verification, scan QR code or visit portal
+                  </footer>
                 </div>
-              </div>
-            </>
-          }
-        >
-          <Loading />
-        </Show>
-      </>
-    </MetaProvider>
-  );
+              </>
+            }
+          >
+            <Loading />
+          </Show>
+        </>
+      </MetaProvider>
+    );
 }
